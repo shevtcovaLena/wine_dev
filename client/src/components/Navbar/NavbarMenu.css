@@ -1,0 +1,13 @@
+.custom-menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.custom-menu .ant-menu-item {
+  flex: 1;
+  justify-content: center;
+}
+
+.custom-menu .ant-menu-item:first-child {
+  flex: none;
+}

@@ -1,0 +1,19 @@
+.tourContainer{
+  /* margin-left: 100px;
+  width: 80%; */
+  display:flex;
+}
+
+.tourDescription{
+  border:1px solid green;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin:10px;
+}
+
+.winePhoto{
+  width:50%;
+  height:50%;
+}
