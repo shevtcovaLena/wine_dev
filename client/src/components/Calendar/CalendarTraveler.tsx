@@ -18,7 +18,7 @@ const CalendarTraveler: React.FC = () => {
       el.tourDateStart.includes(tempDate)
     );
 
-    let listDataTemp = [];
+    const listDataTemp = [];
 
     for (const iterator of tourDate) {
       if (new Date(iterator.tourDateStart) < new Date()) {

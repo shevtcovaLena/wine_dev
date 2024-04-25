@@ -1,20 +1,15 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import React, { useEffect, useState } from 'react';
+import { useAppSelector } from '../../redux/hooks'
 import { Form, InputNumber, Slider, Select, Button, Carousel, Radio } from 'antd';
 const { Option } = Select;
 import { filterTours } from '../../redux/ToursPage/toursSlice';
 import style from './SideFilter.module.css'
 import { useDispatch } from 'react-redux';
-import { FormItemInputContext } from 'antd/es/form/context';
+// import { FormItemInputContext } from 'antd/es/form/context';
 
 const contentStyle: React.CSSProperties = {
-  // margin: 0,
   height: '410px',
   width: '320px',
-  // color: '#fff',
-  // lineHeight: '160px',
-  // textAlign: 'center',
-  
 };
 
 

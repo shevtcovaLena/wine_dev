@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Modal, Radio } from "antd";
+import { Form, Modal, Radio } from "antd";
 import Registration from "../Registration/Registration";
 import Login from "../Login/Login";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";

@@ -1,19 +1,18 @@
-'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Tours', {
+    await queryInterface.createTable("Tours", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       description: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
       },
       owner_id: {
         type: Sequelize.INTEGER,
@@ -23,25 +22,25 @@ module.exports = {
         },
       },
       region: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       price: {
-        type: Sequelize.DECIMAL(15, 2)
+        type: Sequelize.DECIMAL(15, 2),
       },
       location_x: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       location_y: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       length_days: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       path_img: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -52,10 +51,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn("NOW"),
-      }
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Tours');
-  }
+    await queryInterface.dropTable("Tours");
+  },
 };

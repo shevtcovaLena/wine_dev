@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { Tour_date, Reservation_tour } = require("../db/models");
 
-//Получаем все даты по всем турам
+// Получаем все даты по всем турам
 router.get("/", async (req, res) => {
   //   console.log('Зашли в ручку');
   try {
@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-//Получаем все даты по id тура в params
+// Получаем все даты по id тура в params
 router.get("/tour/:id", async (req, res) => {
   //   console.log('Зашли в ручку');
   const { id } = req.params;
@@ -31,7 +31,7 @@ router.get("/tour/:id", async (req, res) => {
   }
 });
 
-//Получаем дату по id
+// Получаем дату по id
 router.get("/:id", async (req, res) => {
   // console.log("Зашли в ручку");
   const { id } = req.params;

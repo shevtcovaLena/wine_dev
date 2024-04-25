@@ -1,5 +1,7 @@
 const router = require("express").Router();
-const { Reservation_tour, Tour, Tour_date, User } = require("../db/models");
+const {
+  Reservation_tour, Tour, Tour_date, User,
+} = require("../db/models");
 
 router.get("/", async (req, res) => {
   const { user } = req.session;
@@ -26,9 +28,7 @@ router.get("/", async (req, res) => {
       ],
     });
 
-    const trueTravelerTours = allTravelerTours.map((tour) =>
-      tour.get({ plain: true })
-    );
+    const trueTravelerTours = allTravelerTours.map((tour) => tour.get({ plain: true }));
 
     const travelInfo = trueTravelerTours.map((info) => {
       info.userName = info.User.full_name;
@@ -53,10 +53,9 @@ router.get("/", async (req, res) => {
     console.log(error);
     res.json({ err: error });
   }
-
 });
 
-router.delete('/:id', async(req, res) => {
+router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     await Reservation_tour.destroy({
@@ -66,5 +65,5 @@ router.delete('/:id', async(req, res) => {
   } catch (error) {
     res.json({ err: error });
   }
-})
+});
 module.exports = router;

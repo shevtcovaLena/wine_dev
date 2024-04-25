@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Button,
-  Cascader,
   DatePicker,
   Form,
-  Input,
   InputNumber,
-  Mentions,
-  Rate,
   Select,
-  TreeSelect,
 } from 'antd';
-import { TourPageType } from '../../pages/TourPage/TourPage';
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
 import Text from 'antd/es/typography/Text'
 import { WarningOutlined } from '@ant-design/icons';
+import { IUser } from '../../redux/userSlice';
 
 
 
@@ -54,7 +48,7 @@ const FormBooking: React.FC<FormBookingProps> = ({ tourDates, quantitySeats, mes
 
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
-  console.log("quantitySeats ================ ",quantitySeats)
+  // console.log("quantitySeats ================ ",quantitySeats)
   const handleDateChange = (date: Date, dateString: string) => {
     // Находим индекс выбранной даты в массиве tourDates
     const index = tourDates.findIndex((tourDate) => tourDate.date === dateString);

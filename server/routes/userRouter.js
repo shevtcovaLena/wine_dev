@@ -10,11 +10,11 @@ router.get("/", (req, res) => {
 
 router.get("/full", async (req, res) => {
   try {
-      const { id } = req.session?.user;
-      const user = await User.findOne({ where: { id } })
-      res.json(user || "");
-    } catch (error) {
-      console.log(error);
+    const { id } = req.session?.user;
+    const user = await User.findOne({ where: { id } });
+    res.json(user || "");
+  } catch (error) {
+    console.log(error);
     res.json({ err: "Ошибка БД!" });
   }
 });
@@ -48,8 +48,9 @@ router.post("/login", async (req, res) => {
 });
 
 router.post("/reg", async (req, res) => {
-  // console.log(req.body);
-  const { full_name, email, telephone, password, role } = req.body;
+  const {
+    full_name, email, telephone, password, role,
+  } = req.body;
   try {
     const user = await User.findOne({
       where: {
@@ -96,7 +97,6 @@ router.post("/reg", async (req, res) => {
   }
 });
 
-
 router.get("/logout", async (req, res) => {
   req.session.destroy(() => {
     res.clearCookie("cookieName");
@@ -124,14 +124,14 @@ router.patch("/", async (req, res) => {
     if (avatar) {
       await User.update(
         { avatar },
-        { where: { id } }
+        { where: { id } },
       );
     }
     await User.update(
       { full_name, telephone },
-      { where: { id } }
+      { where: { id } },
     );
-    const updateUser = await User.findOne({ where: { id }})
+    const updateUser = await User.findOne({ where: { id } });
     // console.log("UpdateUser =======>",updateUser)
     res.status(200).json(updateUser);
   } catch (error) {

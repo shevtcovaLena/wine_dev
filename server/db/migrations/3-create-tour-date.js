@@ -1,13 +1,12 @@
-'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Tour_dates', {
+    await queryInterface.createTable("Tour_dates", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       tour_id: {
         type: Sequelize.INTEGER,
@@ -17,13 +16,13 @@ module.exports = {
         },
       },
       date: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       date_end: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       quantity_seats: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       createdAt: {
         allowNull: false,
@@ -34,10 +33,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn("NOW"),
-      }
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Tour_dates');
-  }
+    await queryInterface.dropTable("Tour_dates");
+  },
 };

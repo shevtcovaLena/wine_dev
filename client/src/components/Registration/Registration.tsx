@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Input, Radio, Select } from "antd";
-// import Password from "antd/es/input/Password";
+import { Button, Form, Input, Select } from "antd";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchRegUser } from "../../redux/thunkUserActions";
 import { IUser } from "../../redux/userSlice";

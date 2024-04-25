@@ -8,7 +8,7 @@ const travelerRouter = require("./travelerRouter");
 const tourEditRouter = require("./tourEditRouter");
 const uploadImageRouter = require("./uploadImageRouter");
 const organizerRouter = require("./organizerRouter");
-const ratingRouter = require("./ratingRouter")
+const ratingRouter = require("./ratingRouter");
 
 router.use("/user", userRouter);
 router.use("/tours", toursRouter);

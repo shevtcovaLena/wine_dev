@@ -1,9 +1,9 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable no-restricted-syntax */
 const Router = require("express").Router();
+const fs = require("fs");
+const path = require("path");
 const { Tour, Tour_date } = require("../db/models");
-const fs = require('fs');
-const path = require('path');
 // status: new,canceled,allowed
 
 async function newDataTour(
@@ -12,7 +12,7 @@ async function newDataTour(
   tbDate,
   coordinates,
   MainFileImg,
-  user
+  user,
 ) {
   try {
     const newTour = await Tour.create({
@@ -63,7 +63,7 @@ async function newSeedTxt(
   coordinates,
   MainFileImg,
   user,
-  tour_id
+  tour_id,
 ) {
   // Текст шаблона
   // {
@@ -89,8 +89,8 @@ async function newSeedTxt(
   //   date_end: iterator.dateStart,
   //   quantity_seats: iterator.quantity_seats,
   //  }]
-   // Построение строки, которая будет записана в файл
-   const tourData = {
+  // Построение строки, которая будет записана в файл
+  const tourData = {
     title: inputs.title,
     description: inputs.description,
     owner_id: user.id,
@@ -103,8 +103,8 @@ async function newSeedTxt(
     path_img: MainFileImg,
   };
 
-  const tourDatesData = tbDate.arrDate.map(iterator => ({
-    tour_id: tour_id,
+  const tourDatesData = tbDate.arrDate.map((iterator) => ({
+    tour_id,
     date: iterator.dateStart,
     date_end: iterator.dateEnd,
     quantity_seats: iterator.quantity_seats,
@@ -119,9 +119,9 @@ async function newSeedTxt(
   // Асинхронная запись в файл
   try {
     await fs.promises.writeFile(filePath, fileContent);
-    console.log('Файл успешно записан!');
+    console.log("Файл успешно записан!");
   } catch (error) {
-    console.error('Ошибка при записи файла:', error);
+    console.error("Ошибка при записи файла:", error);
   }
 }
 
@@ -132,7 +132,7 @@ async function updDataTour(
   tbDate,
   coordinates,
   MainFileImg,
-  user
+  // user,
 ) {
   try {
     await Tour.update(
@@ -150,7 +150,7 @@ async function updDataTour(
       },
       {
         where: { id: tour_id },
-      }
+      },
     );
 
     const tourDatesData = [];
@@ -178,11 +178,12 @@ async function updDataTour(
 
 Router.post("/", async (req, res) => {
   try {
-    const tour_id = req.query.tour_id;
+    const { tour_id } = req.query;
 
     const { user } = req.session;
-    const { valueNumberDay, inputs, tbDate, coordinates, MainFileImg } =
-      req.body;
+    const {
+      valueNumberDay, inputs, tbDate, coordinates, MainFileImg,
+    } = req.body;
 
     console.log("tour_id =============== ", tour_id);
     let resultTour = false;
@@ -194,7 +195,7 @@ Router.post("/", async (req, res) => {
         tbDate,
         coordinates,
         MainFileImg,
-        user
+        user,
       );
     } else {
       resultTour = await updDataTour(
@@ -204,7 +205,7 @@ Router.post("/", async (req, res) => {
         tbDate,
         coordinates,
         MainFileImg,
-        user
+        user,
       );
     }
 

@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchUserInfo } from "../../redux/thunkUserActions";
 
 
-import { show, hide } from "../../redux/userSlice";
+import { show } from "../../redux/userSlice";
 import { Menu } from "antd";
 import "./NavbarMenu.css";
 import Avatar from "antd/es/avatar/avatar";
@@ -38,19 +38,14 @@ export function Navbar() {
   };
 
 const items: MenuItem[] = [
-  // getItem(<Link to="/"><SmileTwoTone twoToneColor="#eb2f96" style={{ fontSize: '32px'}}/></Link>, '1', ),
   getItem(<Link to="/">На главную</Link>, '1', ),
   getItem(<Link to="/tours">Подбор тура</Link>, '2', ),
-  // getItem(<Link to="/tour/date/2">Бронирование</Link>, '3', ),
-  // getItem(<Link to="/tour/1">Страница тура</Link>, '4', ),
   getItem(<Link onClick={showModal}>Вход</Link>, '5', ),
-  // getItem(<Link to="/admin">Пример ЛК админ</Link>, '7', ),
 ];
 
 const itemsTraveler: MenuItem[] = [
   getItem(<Link to="/">На главную</Link>, '1', ),
   getItem(<Link to="/tours">Подбор тура</Link>, '2', ),
-  // getItem(<Link to="/tour/1">Страница тура</Link>, '3', ),
   getItem(<Link to="/lk">Личный кабинет</Link>, '4', ),
   getItem(<Link to="/logout">Выход</Link>, '5', ),
 ];
@@ -58,7 +53,6 @@ const itemsTraveler: MenuItem[] = [
 const itemsOrganize: MenuItem[] = [
   getItem(<Link to="/">На главную</Link>, '1', ),
   getItem(<Link to="/tours">Подбор тура</Link>, '2', ),
-  // getItem(<Link to="/tour/1">Страница тура</Link>, '3', ),
   getItem(<Link to="/lk">Личный кабинет</Link>, '4', ),
   getItem(<Link to="/logout">Выход</Link>, '5', ),
 ];
@@ -66,7 +60,6 @@ const itemsOrganize: MenuItem[] = [
 const itemsAdmin: MenuItem[] = [
   getItem(<Link to="/">На главную</Link>, '1', ),
   getItem(<Link to="/tours">Подбор тура</Link>, '2', ),
-  // getItem(<Link to="/tour/1">Страница тура</Link>, '3', ),
   getItem(<Link to="/lk">Личный кабинет</Link>, '4', ),
   getItem(<Link to="/logout">Выход</Link>, '5', ),
 ];

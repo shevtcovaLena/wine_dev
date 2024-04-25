@@ -1,5 +1,5 @@
-"use strict";
 const { Model } = require("sequelize");
+
 module.exports = (sequelize, DataTypes) => {
   class Reservation_tour extends Model {
     static associate({ User, Tour_date }) {
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Reservation_tour",
-    }
+    },
   );
   return Reservation_tour;
 };

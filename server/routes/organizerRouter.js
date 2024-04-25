@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { compareSync } = require("bcrypt");
+// const { compareSync } = require("bcrypt");
 const {
   User,
   Tour,
@@ -32,7 +32,7 @@ router.get("/active", async (req, res) => {
         ],
       });
 
-      arrReturn = [];
+      const arrReturn = [];
 
       for (const iterator of reserev) {
         const obj = {
@@ -58,7 +58,7 @@ router.get("/active", async (req, res) => {
       return `${year}-${month}-${day}`;
     }
 
-    newData = [];
+    const newData = [];
     for (const iterator of tours) {
       if (iterator.Tour_dates.length) {
         for (const td of iterator.Tour_dates) {
@@ -76,7 +76,7 @@ router.get("/active", async (req, res) => {
               td.quantity_seats
             }`,
             link: `/tour/${iterator.dataValues.id}#disqus_thread`,
-            arrReserv: arrReserv,
+            arrReserv,
           });
         }
       }
@@ -98,7 +98,7 @@ router.get("/tours", async (req, res) => {
         owner_id: user.id,
       },
     });
-  
+
     const ToursOwner = tours.map((tour) => tour.get({ plain: true }));
 
     res.status(200).json(ToursOwner);
@@ -106,7 +106,6 @@ router.get("/tours", async (req, res) => {
     console.log(error);
     res.status(500).json({ err: error });
   }
-
 });
 
 module.exports = router;

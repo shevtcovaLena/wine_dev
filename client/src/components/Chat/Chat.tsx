@@ -1,4 +1,4 @@
-import { JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { useAppSelector } from "../../redux/hooks";
 import { IUser } from "../../redux/userSlice";
@@ -29,7 +29,7 @@ const containerStyle: React.CSSProperties = {
     height: 2000,
   };
 
-const Chat = ({ tourId }) => {
+const Chat = ({ tourId }: { tourId: number}) => {
   //   const [socket, setSocket] = useState<SocketIOClient.Socket | null>(null);
   const [messages, setMessages] = useState<string[]>([]);
   const [message, setMessage] = useState("");
@@ -42,7 +42,7 @@ const Chat = ({ tourId }) => {
   useEffect(() => {
     if (user.full_name) {
       newSocket.emit("join", { tourId, userName: user.full_name });
-      setRoom(tourId);
+      setRoom(String(tourId));
     }
   }, [user.full_name]);
 

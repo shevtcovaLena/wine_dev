@@ -1,10 +1,10 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-const apiRouter = require("./routes/apiRouter");
+const { Server } = require("socket.io");
 const session = require("express-session");
 const FileStore = require("session-file-store")(session);
-const { Server } = require("socket.io");
+const apiRouter = require("./routes/apiRouter");
 
 require("dotenv").config();
 
