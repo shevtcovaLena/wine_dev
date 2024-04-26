@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./TourPage.module.css";
 import FormBooking from "../../components/FormBooking/FormBooking";
@@ -9,8 +9,10 @@ import { Card, Rate, Button, Drawer, Space, message } from "antd";
 import Paragraph from "antd/es/typography/Paragraph";
 import Title from "antd/es/typography/Title";
 import Chat from "../../components/Chat/Chat";
-import type { DrawerProps, RadioChangeEvent } from "antd";
+// import type { DrawerProps, RadioChangeEvent } from "antd";
 import { useAppSelector } from "../../redux/hooks";
+import { IUser } from "../../redux/userSlice";
+import { setQuantitySeats } from "../../redux/form_booking/formBookingSlice";
 
 // const { Title, Paragraph, Text, Link } = Typography;
 
@@ -40,15 +42,19 @@ export type TourDateType = {
   updatedAt: Date;
 };
 
+export type RetingAverageType = { tour_id: number, average: number }
+
 export function TourPage() {
   const { id } = useParams();
   const [tourPage, setTourPage] = useState<TourPageType | null>(null);
   const [tourDates, setTourDates] = useState<TourDateType[]>([]);
-  const [quantitySeats, setQuantitySeats] = useState<number[]>([]);
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  // const [quantitySeats, setQuantitySeats] = useState<number[]>([]);
+  // const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [open, setOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const user: IUser = useAppSelector((store) => store.userSlice.user);
+
+  
 
   const navigate = useNavigate();
 
@@ -60,7 +66,7 @@ export function TourPage() {
     navigate({ hash: "#disqus_thread" });
   }, [navigate]);
 
-  const [tourRatings, setTourRatings] = useState({});
+  const [tourRatings, setTourRatings] = useState<RetingAverageType[]>([]);
 
   useEffect(() => {
     axios
@@ -73,10 +79,10 @@ export function TourPage() {
       });
   }, []);
 
-  const getAverageRating = (tourId) => {
+  const getAverageRating = (tourId: number) => {
     const ratingsArray = Object.values(tourRatings); // Преобразование объекта в массив значений
-    const rating = ratingsArray.find((rating) => rating.tour_id === tourId);
-    const average = rating ? parseFloat(rating.average) : 0; // Преобразование среднего рейтинга в число
+    const rating = ratingsArray.find((el) => el.tour_id === tourId);
+    const average = rating ? parseFloat(String(rating.average)) : 0; // Преобразование среднего рейтинга в число
     return average.toFixed(1); // Вызов метода toFixed() на числовом значении
   };
 
@@ -99,8 +105,8 @@ export function TourPage() {
         setTourDates(dates);
         console.log(dates, "DDDATES");
         const seats = dates.map((date) => date.quantity_seats);
-        console.log(seats, "SEEEATs");
-        setQuantitySeats(seats);
+        console.log(seats, "SEEEATs");        
+        // setQuantitySeats(seats);
       });
     }
   }, [id]);
@@ -120,9 +126,9 @@ export function TourPage() {
     setOpen(false);
   };
 
-  const handleUpdateCurrentIndex = (index: number) => {
-    setCurrentIndex(index);
-  };
+  // const handleUpdateCurrentIndex = (index: number) => {
+  //   setCurrentIndex(index);
+  // };
 
   console.log(tourDates, "TOUR DATES");
 
@@ -227,8 +233,8 @@ export function TourPage() {
               <div style={{ marginTop: 30 }}>
                 <FormBooking
                   tourDates={tourDates}
-                  quantitySeats={quantitySeats}
-                  currentIndex={currentIndex}
+                  // quantitySeats={quantitySeats}
+                  // currentIndex={currentIndex}
                   messageApi={messageApi}
                 />
               </div>

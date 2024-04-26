@@ -1,6 +1,7 @@
 // import React from "react";
 import { Button, Form, FormInstance, Input, InputNumber } from "antd";
 import { CheckOutlined } from "@ant-design/icons";
+import { useAppSelector } from "../../redux/hooks";
 
 export interface IUpdateInput {
      full_name?:string,
@@ -22,6 +23,8 @@ export default function ReservUserForm( {
     formStateHandler: () => void,
     inputs: IUpdateInput,
   } ) {
+
+    const {quantitySeats} = useAppSelector((store) => store.formBookingSlice)
 
   return (
     <Form 
@@ -50,7 +53,7 @@ export default function ReservUserForm( {
         <Input value={inputs.telephone}  type="telephone" placeholder="+7**********" />
       </Form.Item>
       <Form.Item name="number" label="Количество человек" >
-        <InputNumber value={inputs.number} min={1} max={maxSeets} defaultValue={1}/>
+        <InputNumber value={inputs.number} min={1} max={maxSeets} defaultValue={quantitySeats}/>
       </Form.Item>
       <Form.Item>
         <Button type="primary" size="large" icon={<CheckOutlined />} onClick={handleSubmit}>
