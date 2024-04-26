@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Form, Modal, Radio } from "antd";
 import Registration from "../Registration/Registration";
 import Login from "../Login/Login";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { show, hide } from "../../redux/userSlice";
+import { hide } from "../../redux/userSlice";
 
 export default function RegLogModal() {
   const open = useAppSelector(
@@ -12,10 +12,9 @@ export default function RegLogModal() {
   const dispatch = useAppDispatch();
   const msg = useAppSelector((store) => store.userSlice.msg);
 
-  const showModal = () => {
-    dispatch(show());
-  };
-
+  // const showModal = () => {
+  //   dispatch(show());
+  // };
 
   const handleCancel = () => {
     console.log("Clicked cancel button");
@@ -32,13 +31,11 @@ export default function RegLogModal() {
     <>
       <Modal
         open={open}
-        // onOk={handleOk}
-        // confirmLoading={confirmLoading}
         onCancel={handleCancel}
         footer={<p style={{ color: "red" }}>{msg}</p>}
       >
         <Form
-          reglog={formType}
+          // reglog={formType}
           initialValues={{ reglog: formType }}
           onValuesChange={onFormChange}
           style={{ maxWidth: 600 }}
@@ -50,13 +47,11 @@ export default function RegLogModal() {
             </Radio.Group>
           </Form.Item>
         </Form>
-        {/* <Form> */}
           {formType === "reg" ? (
             <Registration handleCancel={handleCancel} />
           ) : (
             <Login handleCancel={handleCancel} />
           )}
-        {/* </Form> */}
       </Modal>
     </>
   );

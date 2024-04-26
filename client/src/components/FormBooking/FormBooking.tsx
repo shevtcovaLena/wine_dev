@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
   Button,
-  DatePicker,
+  // DatePicker,
   Form,
   InputNumber,
   Select,
@@ -14,7 +14,7 @@ import { IUser } from '../../redux/userSlice';
 
 
 
-const { RangePicker } = DatePicker;
+// const { RangePicker } = DatePicker;
 
 const formItemLayout = {
   labelCol: {
@@ -26,6 +26,7 @@ const formItemLayout = {
     sm: { span: 14 },
   },
 };
+
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);

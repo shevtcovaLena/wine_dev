@@ -6,19 +6,17 @@ import { Navbar } from "./components/Navbar/Navbar";
 import ToursPage from "./pages/ToursPage/ToursPage";
 
 import { TourPage } from "./pages/TourPage/TourPage";
-import { Col, ConfigProvider, Flex, Layout, Row, theme } from "antd";
+import { Col, ConfigProvider, Flex, Layout, Row, 
+  // theme,
+ } from "antd";
 import RegLogModal from "./components/RegLogModal/RegLogModal";
 import { Logout } from "./pages/LogoutPage/Logout";
 import { ReservPage } from "./pages/ReservPage/ReservPage";
 import { TourEditPage } from "./pages/TourEditPage/TourEditPage";
-import TravelerPage from "./pages/TravelerPage/TravelerPage";
-import AdminPage from "./pages/AdminPage/AdminPage";
-import OrganizerPage from "./pages/OrganizerPage/OrganizerPage";
 import { Lk } from "./components/Navbar/Lk";
 import { GithubOutlined } from "@ant-design/icons";
-import ProtectedRoute from "./router/ProtectedRoute";
-import { useAppSelector } from "./redux/hooks";
-import { IUser } from "./redux/userSlice";
+// import { useAppSelector } from "./redux/hooks";
+// import { IUser } from "./redux/userSlice";
 import ruRU from 'antd/locale/ru_RU';
 
 import dayjs from 'dayjs';
@@ -30,10 +28,10 @@ dayjs.updateLocale('ru', {
   weekStart: 1,
 });
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Footer, Content } = Layout;
 
 function App() {
-  const user: IUser = useAppSelector((store) => store.userSlice.userInfo);
+ 
 
   return (
     <>

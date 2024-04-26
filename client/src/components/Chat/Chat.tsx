@@ -7,12 +7,11 @@ import Message from "./Message";
 import React from "react";
 
 
-interface IMessageData {
-    data: {
-        userName: string,
+export interface IMessageData {
+         userName: string,
         message: string, 
         room?: number,
-    }
+        time: string,
 }
 
 const containerStyle: React.CSSProperties = {
@@ -30,8 +29,7 @@ const containerStyle: React.CSSProperties = {
   };
 
 const Chat = ({ tourId }: { tourId: number}) => {
-  //   const [socket, setSocket] = useState<SocketIOClient.Socket | null>(null);
-  const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<IMessageData[]>([]);
   const [message, setMessage] = useState("");
   const [room, setRoom] = useState("");
 
@@ -50,33 +48,7 @@ const Chat = ({ tourId }: { tourId: number}) => {
     newSocket.on("message", ({ data }) => {
       setMessages((prevMessages) => [...prevMessages, data]);
     });
-    // return () => {
-    //   newSocket.disconnect();
-    // };
   }, [newSocket]);
-
-    // useEffect(() => {
-    //   //Обработчик события подключения
-    //   newSocket.on('connect', () => {
-    //     console.log('Подключено к серверу чата');
-    //   });
-
-  //     // Обработчик события получения сообщения
-  //     // newSocket.on('message', (message: string) => {
-  //     //   setMessages((prevMessages) => [...prevMessages, message]);
-  //     // });
-
-  //     // Обработчик события отключения
-  //     newSocket.on('disconnect', () => {
-  //       console.log('Отключено от сервера чата');
-  //     //   setSocket(null);
-  //     });
-
-  //     // Отключение сокета при размонтировании компонента
-    //   return () => {
-    //     newSocket.disconnect();
-    //   };
-    // }, []);
 
   const sendMessage = () => {
     if (newSocket && message) {
@@ -87,15 +59,14 @@ const Chat = ({ tourId }: { tourId: number}) => {
     }
   };
   
-const [container, setContainer] = React.useState<HTMLDivElement | null>(null);
 
      return (
         <div style={{ maxWidth: '2000px', margin: '20 0'}}>
-      <div style={containerStyle} ref={setContainer}>
+      <div style={containerStyle} >
         <div style={style}>
         {user.role !== 'organizer' ? messages.map((message: IMessageData, index: number) => (
             <div key={index}>
-          <Message message = { message } isAuthor={ message.userName === user.full_name } avatar={user.avatar} />
+          <Message message = { message } isAuthor={ message.userName === user.full_name } avatar={user.avatar}  />
           </div>))
           :
           messages.filter((msg) => (msg.userName !== 'Админ')).map((message: IMessageData, index: number) => (

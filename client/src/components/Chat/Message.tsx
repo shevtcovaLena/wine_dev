@@ -1,13 +1,14 @@
-import React from "react";
+// import React from "react";
 import { Avatar, Card, Flex } from "antd";
 import Title from "antd/es/typography/Title";
 import Text from "antd/es/typography/Text";
 import Paragraph from "antd/es/typography/Paragraph";
 import { UserOutlined } from "@ant-design/icons";
+import { IMessageData } from "./Chat";
 
 // interface Props {}
 
-function Message({ message, isAuthor, avatar }) {
+function Message({ message, isAuthor, avatar }: {message: IMessageData, isAuthor: boolean, avatar: string | undefined}) {
   console.log(avatar? `/public/images/${avatar}` : "avatar.jpg")
   return (
     <>

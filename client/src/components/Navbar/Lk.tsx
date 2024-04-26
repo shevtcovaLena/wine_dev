@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import AdminPage from "../../pages/AdminPage/AdminPage"
 import TravelerPage from "../../pages/TravelerPage/TravelerPage"
 import OrganizerPage from "../../pages/OrganizerPage/OrganizerPage"

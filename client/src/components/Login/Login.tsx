@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form, Input } from "antd";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchLogUser } from "../../redux/thunkUserActions";
@@ -49,19 +49,18 @@ export default function Login({ handleCancel }: { handleCancel: () => void }) {
         <Form.Item
           label="Email"
           name="email"
-          value={inputs.email}
+          
           rules={[{ required: true, message: "Пожалуйста введите email!"}]}
         >
-          <Input type="email" placeholder="Введите email..." />
+          <Input type="email" value={inputs.email} placeholder="Введите email..." />
         </Form.Item>
         <Form.Item
           label="Пароль"
           name="password"
-          value={inputs.password}
           rules={[{ required: true, message: "Пожалуйста введите пароль!" }
           ]}
         >
-          <Input type="password" />
+          <Input type="password" value={inputs.password}/>
         </Form.Item>
         <Form.Item>
           <Button type="primary" onClick={() => handleSubmit()}>

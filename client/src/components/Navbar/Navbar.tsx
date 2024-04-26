@@ -40,7 +40,7 @@ export function Navbar() {
 const items: MenuItem[] = [
   getItem(<Link to="/">На главную</Link>, '1', ),
   getItem(<Link to="/tours">Подбор тура</Link>, '2', ),
-  getItem(<Link onClick={showModal}>Вход</Link>, '5', ),
+  getItem(<a onClick={showModal}>Вход</a>, '5', ),
 ];
 
 const itemsTraveler: MenuItem[] = [

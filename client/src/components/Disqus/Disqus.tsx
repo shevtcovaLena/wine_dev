@@ -1,20 +1,48 @@
 import React, { useEffect } from 'react';
 
+interface ResetOptions {
+  reload: boolean;
+  config: () => void;
+  page: {
+    url: string;
+    identifier: string;
+  };
+}
+
+interface DisqusConfig {
+  page: {
+    url: string;
+    identifier: string;
+  };
+  reset(options: ResetOptions): void;
+  // Добавьте другие свойства и методы Disqus, которые вы используете в вашем коде
+  // Например:
+  // anyOtherMethod(): void;
+}
+
+declare global {
+  interface Window {
+    DISQUS: DisqusConfig | undefined;
+  }
+}
+
 const Disqus: React.FC<{ url: string; identifier: string }> = ({ url, identifier }) => {
   useEffect(() => {
-    // Функция, которая будет вызываться после загрузки скрипта Disqus
     const loadDisqus = () => {
-      /* global DISQUS */
-      if (DISQUS) {
-        DISQUS.reset({
+      if (window.DISQUS) {
+        window.DISQUS.reset({
           reload: true,
           config: function () {
-            this.page.url = url;
-            this.page.identifier = identifier;
+            this.page = {
+              url: url,
+              identifier: identifier
+            };
           },
+          page: { url: "", identifier: "" } // Пустой объект по умолчанию
         });
       }
     };
+
 
     // Создаем скрипт Disqus
     const disqusScript = document.createElement('script');
