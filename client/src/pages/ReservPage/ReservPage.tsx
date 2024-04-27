@@ -57,6 +57,10 @@ export function ReservPage() {
 
   useEffect(() => {
     void dispatch(fetchTours());
+    axios
+      .get<tourDateType>(`http://localhost:3009/api/date/${id}`)
+      .then((response) => setDateTour(response.data))
+      .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
@@ -75,13 +79,6 @@ export function ReservPage() {
 
   useEffect(() => {
     axios
-      .get<tourDateType>(`http://localhost:3009/api/date/${id}`)
-      .then((response) => setDateTour(response.data))
-      .catch((error) => console.log(error));
-  }, []);
-
-  useEffect(() => {
-    axios
       .get<number>(`http://localhost:3009/api/reserv/date/${dateTour.id}`)
       .then((response) => setReservCount(response.data))
       .catch((error) => console.log(error));
@@ -96,10 +93,7 @@ export function ReservPage() {
   }, [userInfo]);
 
   useEffect(() => {
-    form.setFieldsValue(inputs)    
-  }, [inputs]);
-
-  useEffect(() => {
+    form.setFieldsValue(inputs)
     setReservFetchBody(()=> ({ 
       id: dateTour.id,
       date: dateTour.date,

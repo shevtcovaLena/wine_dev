@@ -15,7 +15,6 @@ router.get("/", async (req, res) => {
 
 // Получаем все даты по id тура в params
 router.get("/tour/:id", async (req, res) => {
-  //   console.log('Зашли в ручку');
   const { id } = req.params;
   try {
     const allDateByTour = await Tour_date.findAll({
@@ -23,7 +22,6 @@ router.get("/tour/:id", async (req, res) => {
       include: [Reservation_tour],
     });
 
-    // console.log(allDateByTour)
     res.json(allDateByTour);
   } catch (error) {
     console.log(error);

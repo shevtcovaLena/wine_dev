@@ -9,12 +9,8 @@ import { Card, Rate, Button, Drawer, Space, message } from "antd";
 import Paragraph from "antd/es/typography/Paragraph";
 import Title from "antd/es/typography/Title";
 import Chat from "../../components/Chat/Chat";
-// import type { DrawerProps, RadioChangeEvent } from "antd";
 import { useAppSelector } from "../../redux/hooks";
 import { IUser } from "../../redux/userSlice";
-import { setQuantitySeats } from "../../redux/form_booking/formBookingSlice";
-
-// const { Title, Paragraph, Text, Link } = Typography;
 
 export type TourPageType = {
   id: number;
@@ -48,8 +44,6 @@ export function TourPage() {
   const { id } = useParams();
   const [tourPage, setTourPage] = useState<TourPageType | null>(null);
   const [tourDates, setTourDates] = useState<TourDateType[]>([]);
-  // const [quantitySeats, setQuantitySeats] = useState<number[]>([]);
-  // const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [open, setOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const user: IUser = useAppSelector((store) => store.userSlice.user);
@@ -103,10 +97,7 @@ export function TourPage() {
       const idAsNumber = parseInt(id);
       fetchTourDates(idAsNumber).then((dates) => {
         setTourDates(dates);
-        console.log(dates, "DDDATES");
         const seats = dates.map((date) => date.quantity_seats);
-        console.log(seats, "SEEEATs");        
-        // setQuantitySeats(seats);
       });
     }
   }, [id]);
@@ -125,10 +116,6 @@ export function TourPage() {
   const onClose = () => {
     setOpen(false);
   };
-
-  // const handleUpdateCurrentIndex = (index: number) => {
-  //   setCurrentIndex(index);
-  // };
 
   console.log(tourDates, "TOUR DATES");
 
@@ -233,8 +220,6 @@ export function TourPage() {
               <div style={{ marginTop: 30 }}>
                 <FormBooking
                   tourDates={tourDates}
-                  // quantitySeats={quantitySeats}
-                  // currentIndex={currentIndex}
                   messageApi={messageApi}
                 />
               </div>
