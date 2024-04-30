@@ -1,23 +1,19 @@
-import axios from "axios";
-import React, { memo, useCallback, useEffect, useState } from "react";
+// import axios from "axios";
+import { memo, useCallback, useEffect, useState } from "react";
 import {
   YMap,
   YMapDefaultSchemeLayer,
   YMapDefaultFeaturesLayer,
   YMapComponentsProvider,
   YMapDefaultMarker,
-  YMapMarker,
-  YMapControl,
-  YMapControls,
   YMapListener,
-  YMapGeolocationControl,
 } from "ymap3-components";
 // import { features, LOCATION } from
-import { YMapMyMarker } from "./YMapMyMarker"
+// import { YMapMyMarker } from "./YMapMyMarker"
 
 function YandexMapEdit({ coordinates, setCoordinates }) {
-  const [markerTitle, setMarkerTitle] = useState();
-  const [markerCoordinates, setMarkerCoordinates] = useState(null);
+  // const [markerTitle, setMarkerTitle] = useState();
+  // const [markerCoordinates, setMarkerCoordinates] = useState(null);
   const [coordinatesTemp, setCoordinatesTemp] = useState([]);
 
   // const clickCallback = (object,entity) => setCoordinates(() => entity.coordinates);

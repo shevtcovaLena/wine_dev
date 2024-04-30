@@ -60,6 +60,7 @@ const FormBooking: React.FC<FormBookingProps> = ({ tourDates, messageApi }) => {
   const [availabilityStr, setAvailability] = useState("");
 
   const onChangeSelect = (value: valueType, option: OptionProps) => {
+    console.log(value)
     setDateId((pre) => (option.key ? option.key : pre));
 
     const tourDate = tourDates.filter((el) => el.id === Number(option.key));

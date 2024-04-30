@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form, Input, Select } from "antd";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchRegUser } from "../../redux/thunkUserActions";

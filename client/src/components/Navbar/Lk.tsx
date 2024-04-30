@@ -1,3 +1,4 @@
+// import React from "react";
 import { useEffect } from 'react'
 import AdminPage from "../../pages/AdminPage/AdminPage"
 import TravelerPage from "../../pages/TravelerPage/TravelerPage"
