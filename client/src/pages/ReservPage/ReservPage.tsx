@@ -1,28 +1,29 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Card, Col, Divider, Form, Row, Typography } from "antd";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { ITour } from "../../redux/ToursPage/toursTypes";
+import { ITour, initialTour } from "../../redux/ToursPage/toursTypes";
 import { fetchTours } from "../../redux/ToursPage/toursThunkActions";
-import { IUser } from "../../redux/userSlice";
+import { IUser, initialUser } from "../../redux/userSlice";
 import ReservUserForm, { IUpdateInput } from "../../components/ReservUserForm/ReservUserForm";
 import { fetchUpdateUser } from "../../redux/thunkUserActions";
 
 export interface tourDateType {
   id: number;
   tour_id: number;
-  date: Date;
-  date_end: Date;
+  date: string;
+  date_end: string;
   quantity_seats: number;
-};
+}
 
 const initTourDate = {
   id: 0,
   tour_id: 0,
-  date: null,
+  date: '',
+  date_end: '',
   quantity_seats: 0,
-};
+}
 
 export function ReservPage() {
   const { id } = useParams();
@@ -30,8 +31,8 @@ export function ReservPage() {
   console.log(location)
   const [dateTour, setDateTour] = useState<tourDateType>(initTourDate);
   const [reservCount, setReservCount] = useState<number>(0);
-  const [tourInfo, setTourInfo] = useState<ITour>({});
-  const [userInfo, setUserInfo] = useState<IUser>({});
+  const [tourInfo, setTourInfo] = useState<ITour>(initialTour);
+  const [userInfo, setUserInfo] = useState<IUser>(initialUser);
 
   const userSession: IUser = useAppSelector((store) => store.userSlice.user);
   
@@ -65,7 +66,7 @@ export function ReservPage() {
 
   useEffect(() => {
     axios
-      .get<tourDateType>(`http://localhost:3009/api/user/${userSession.id}`)
+      .get<IUser>(`http://localhost:3009/api/user/${userSession.id}`)
       .then((response) => setUserInfo(response.data))
       .catch((error) => console.log(error));
   }, [userSession]);
@@ -141,7 +142,7 @@ export function ReservPage() {
   }
   } 
 
-  const discount: number = (price: number, number: number) => {
+  const discount: (price: number, number: number) => number = (price, number) => {
     if (number === 1) {
       return 0
     }
@@ -172,7 +173,7 @@ export function ReservPage() {
               Длительность <strong>{tourInfo?.length_days}</strong> дней
             </p>
             <p>
-              {new Date(dateTour.date).toLocaleDateString()} -{" "}
+              {new Date(dateTour.date).toLocaleDateString()} - {" "}
               {new Date(dateTour.date_end).toLocaleDateString()}
             </p>
             <Divider orientation="left" orientationMargin="0">

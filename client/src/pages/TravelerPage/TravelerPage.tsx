@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { fetchTravelerTours } from '../../redux/Traveler_tours/travelerThunkActions'
 import { Link } from 'react-router-dom';
-import { Divider, Drawer, Flex, Rate, Space, Button } from 'antd';
+import { Drawer, Flex, Rate, Button } from 'antd';
 import OneTravel from './OneTravel'
 import axios from 'axios';
 import UserInfo from './UserInfo';
 import Title from 'antd/es/typography/Title';
-import Chat from '../../components/Chat/Chat';
-import { CalendarOutlined, CalendarTwoTone, DoubleRightOutlined } from '@ant-design/icons';
+import { CalendarOutlined } from '@ant-design/icons';
 import CalendarTraveler from '../../components/Calendar/CalendarTraveler';
+
+type RatingRecordType = {
+  [key: string]:{
+    rated: boolean,
+    rating: number,
+  }}
 
 export default function TravelerPage() {
 
@@ -24,9 +29,9 @@ export default function TravelerPage() {
   const currentUser = useAppSelector(state => state.userSlice.userInfo);
   const userId = currentUser ? currentUser.id : null; // здесь id юзера
 
-  const [ratedTours, setRatedTours] = useState({});
+  // const [ratedTours, setRatedTours] = useState({});
 
-  const [tourRatings, setTourRatings] = useState({});
+  const [tourRatings, setTourRatings] = useState<RatingRecordType>({});
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
@@ -43,7 +48,7 @@ export default function TravelerPage() {
     setTourRatings(savedRatings);
   }, []);
 
-  const saveRatingToLocalStorage = (tourId, rating) => {
+  const saveRatingToLocalStorage = (tourId: number, rating: number) => {
     // Сохраняем рейтинг тура в локальное хранилище
     const updatedRatings = { ...tourRatings, [tourId]: { rated: true, rating: rating } };
     console.log('Updated ratings:', updatedRatings);
@@ -51,7 +56,7 @@ export default function TravelerPage() {
     setTourRatings(updatedRatings);
   };
 
-  const sendRatingToServer = async (userId, tourId, rating) => {
+  const sendRatingToServer = async (userId: number, tourId: number, rating: number) => {
     try {
       const response = await axios.post('http://localhost:3009/api/ratings', {
         user_id: userId,
@@ -59,7 +64,6 @@ export default function TravelerPage() {
         rate: rating
       });
       console.log('response ====',response.data);
-      // console.log('ЮЗЕР ИД',userId)
       return response.data;
     } catch (error) {
       console.error('Error sending rating:', error);
@@ -67,20 +71,21 @@ export default function TravelerPage() {
     }
   };
 
-  const rateTour = (tourId, rating) => {
-
-    saveRatingToLocalStorage(tourId, rating);
-  
-    sendRatingToServer(userId, tourId, rating)
-      .then(data => {
-        setRatedTours(prevState => ({
-          ...prevState,
-          [tourId]: true
-        }));
-      })
-      .catch(error => {
-        console.error('Error rating tour:', error);
-      });
+  const rateTour = (tourId: number, rating: number) => {
+    if(userId) {
+      saveRatingToLocalStorage(tourId, rating);
+    
+      sendRatingToServer(userId, tourId, rating)
+        // .then(() => {
+        //   setRatedTours(prevState => ({
+        //     ...prevState,
+        //     [tourId]: true
+        //   }));
+        // })
+        .catch(error => {
+          console.error('Error rating tour:', error);
+        });
+    }
   };
 
   return (

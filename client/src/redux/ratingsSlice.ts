@@ -1,21 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit';
+// import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {};
 
-const ratingsSlice = createSlice({
-  name: 'ratings',
-  initialState,
-  reducers: {
-    rateTour(state, action) {
-      const { userId, tourId, rating } = action.payload;
-      if (!state[tourId]) {
-        state[tourId] = {};
-      }
-      state[tourId][userId] = rating;
-    },
-  },
-});
+// const initialState = {};
 
-export const { rateTour } = ratingsSlice.actions;
+// const ratingsSlice = createSlice({
+//   name: 'ratings',
+//   initialState,
+//   reducers: {
+//     rateTour(state, action) {
+//       const { userId, tourId, rating } = action.payload;
+//       if (!state[tourId]) {
+//         state[tourId] = {};
+//       }
+//       state[tourId][userId] = rating;
+//     },
+//   },
+// });
 
-export default ratingsSlice.reducer;
+// export const { rateTour } = ratingsSlice.actions;
+
+// export default ratingsSlice.reducer;

@@ -21,7 +21,7 @@ const toursSlice = createSlice({
   reducers: {
     filterTours(state, action) {
     
-    state.tours = action.payload.toursDefault.filter((tour) => {
+    state.tours = action.payload.toursDefault.filter((tour: ITour) => {
       //проверка региона
     const isRegionTour = action.payload.values.region ? tour.region === action.payload.values.region : true;
 
@@ -44,8 +44,8 @@ const toursSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(fetchTours.fulfilled, (state, { payload }) => {
-      state.tours = payload; // payload это response.data из thunk
-      state.toursDefault = payload;
+      state.tours = payload as ToursType; // payload это response.data из thunk
+      state.toursDefault = payload as ToursType;
       state.isLoading = false;
     });
     builder.addCase(fetchTourCancel.fulfilled, (state, { payload }) => {
@@ -69,7 +69,7 @@ const toursSlice = createSlice({
     });
     builder.addCase(fetchTourAllow.fulfilled, (state, { payload }) => {
       if (payload) {
-        state.toursDefault = state.toursDefault.map((tour) => {
+        state.toursDefault = state.toursDefault.map((tour: ITour) => {
           if (tour.id === payload) {
             tour.status = 'allowed';
             return tour

@@ -12,10 +12,6 @@ export default function RegLogModal() {
   const dispatch = useAppDispatch();
   const msg = useAppSelector((store) => store.userSlice.msg);
 
-  // const showModal = () => {
-  //   dispatch(show());
-  // };
-
   const handleCancel = () => {
     console.log("Clicked cancel button");
     dispatch(hide());
@@ -35,7 +31,6 @@ export default function RegLogModal() {
         footer={<p style={{ color: "red" }}>{msg}</p>}
       >
         <Form
-          // reglog={formType}
           initialValues={{ reglog: formType }}
           onValuesChange={onFormChange}
           style={{ maxWidth: 600 }}

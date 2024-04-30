@@ -11,6 +11,20 @@ interface ITour {
     length_days: number,
     path_img: string
   }
+
+export const initialTour = {
+  id: 0,
+  title: '',
+  description: '',
+  owner_id: 0,
+  region: '',
+  price: 0,
+  location_x: '',
+  location_y: '',
+  status: '',
+  length_days: 0,
+  path_img: '',
+}
   
   type ToursType = Array<ITour>;
   

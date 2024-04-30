@@ -20,7 +20,7 @@ export type UserStateType = {
     msg: string,
 }
 
-const initialUser: IUser = {
+export const initialUser: IUser = {
     full_name:'',
     email:'',
     telephone:'',
