@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import type { AxiosResponse } from 'axios';
-import { ITour, ToursType } from './toursTypes';
+// import type { AxiosResponse } from 'axios';
+import { ToursType } from './toursTypes';
 
 export const fetchTours = createAsyncThunk('tours/all', async () => { // 'posts/all' = это не URL
   try {

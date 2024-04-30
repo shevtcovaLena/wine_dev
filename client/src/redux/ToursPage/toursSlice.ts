@@ -57,7 +57,6 @@ const toursSlice = createSlice({
           }
           return tour
         });
-        // TODO Спросить не помешает ли на других страницах
         state.tours = state.tours.map((tour) => {
           if (tour.id === payload) {
             tour.status = 'canceled';
@@ -70,15 +69,14 @@ const toursSlice = createSlice({
     builder.addCase(fetchTourAllow.fulfilled, (state, { payload }) => {
       if (payload) {
         state.toursDefault = state.toursDefault.map((tour: ITour) => {
-          if (tour.id === payload) {
+          if (payload) {
             tour.status = 'allowed';
             return tour
           }
           return tour
         });
-        // TODO Спросить не помешает ли на других страницах
         state.tours = state.tours.map((tour) => {
-          if (tour.id === payload) {
+          if (payload) {
             tour.status = 'allowed';
             return tour
           }
