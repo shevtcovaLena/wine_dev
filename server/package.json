@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src -d dist",
+    "build": "babel server -d dist",
     "mig": "npx sequelize db:migrate:undo:all && npx sequelize db:migrate",
     "seed": "npx sequelize db:seed:all",
     "createDB": "npx sequelize db:create",
