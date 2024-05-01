@@ -52,7 +52,7 @@ io.on("connection", (socket) => {
       data: {
         userName: "Админ",
         message: `Здравствуйте, ${userName}! Здесь вы можете связаться с организатором тура.`,
-        time: new Date().toLocaleTimeString().slice(0,5)
+        time: new Date().toLocaleTimeString().slice(0, 5),
       },
     });
   });

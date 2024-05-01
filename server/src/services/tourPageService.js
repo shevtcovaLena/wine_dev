@@ -1,4 +1,4 @@
-const { Tour } = require("../db/models/tour");
+const { Tour } = require("../../db/models/tour");
 
 exports.getTourPage = async () => {
   try {

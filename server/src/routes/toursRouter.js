@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Tour, User } = require("../db/models");
+const { Tour, User } = require("../../db/models");
 
 router.get("/", async (req, res) => {
   // console.log('Зашли в ручку');

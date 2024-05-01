@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const {
   Reservation_tour, Tour, Tour_date, User,
-} = require("../db/models");
+} = require("../../db/models");
 
 router.get("/", async (req, res) => {
   const { user } = req.session;

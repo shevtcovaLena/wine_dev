@@ -1,7 +1,7 @@
 const express = require("express");
 
 const router = express.Router();
-const { Rating, sequelize } = require("../db/models");
+const { Rating, sequelize } = require("../../db/models");
 
 router.get("/average", async (req, res) => {
   try {
