@@ -132,3 +132,4 @@ dist
 sessions
 
 db/seeders/
+.vercel
