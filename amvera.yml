@@ -9,5 +9,5 @@ run:
   containerPort: 3009
 
 build:
-artifacts:
-  "server/**/*": build
+  artifacts:
+    "server/**/*": .
