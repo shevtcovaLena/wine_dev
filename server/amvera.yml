@@ -7,3 +7,7 @@ meta:
 run:
   scriptName: server.js
   containerPort: 3009
+
+build:
+artifacts:
+  "server/**/*": build
