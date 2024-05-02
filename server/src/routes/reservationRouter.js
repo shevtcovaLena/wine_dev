@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Reservation_tour } = require("../db/models");
+const { Reservation_tour } = require("../../db/models");
 
 // получаем число броней на конкретную дату
 router.get("/date/:id", async (req, res) => {

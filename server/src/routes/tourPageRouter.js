@@ -1,6 +1,6 @@
 const Router = require("express").Router();
 
-const { Tour } = require("../db/models");
+const { Tour } = require("../../db/models");
 
 Router.get("/", async (req, res) => {
   try {

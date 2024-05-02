@@ -7,7 +7,7 @@ const {
   Rating,
   Tour_date,
   Reservation_tour,
-} = require("../db/models");
+} = require("../../db/models");
 
 router.get("/active", async (req, res) => {
   try {

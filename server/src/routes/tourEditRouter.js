@@ -3,7 +3,7 @@
 const Router = require("express").Router();
 const fs = require("fs");
 const path = require("path");
-const { Tour, Tour_date } = require("../db/models");
+const { Tour, Tour_date } = require("../../db/models");
 // status: new,canceled,allowed
 
 async function newDataTour(

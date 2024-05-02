@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Tour_date, Reservation_tour } = require("../db/models");
+const { Tour_date, Reservation_tour } = require("../../db/models");
 
 // Получаем все даты по всем турам
 router.get("/", async (req, res) => {
