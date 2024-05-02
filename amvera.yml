@@ -4,10 +4,11 @@ meta:
     name: npm
     version: 18
 
-run:
-  scriptName: server.js
-  containerPort: 3009
-
 build:
   artifacts:
     "server/**/*": .
+
+run:
+  scriptName: server.js
+  containerPort: 80
+  command: npm run start
