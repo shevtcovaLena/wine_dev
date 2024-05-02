@@ -6,9 +6,9 @@ meta:
 
 build:
   artifacts:
-    "server/**/*": .
+    "server/**/*": "/".
 
 run:
-  scriptName: server.js
+  scriptName: server/src/server.js
   containerPort: 80
   command: npm run start
