@@ -5,5 +5,5 @@ meta:
     version: 18
 
 run:
-  scriptName: index.js
+  scriptName: server.js
   containerPort: 3009
