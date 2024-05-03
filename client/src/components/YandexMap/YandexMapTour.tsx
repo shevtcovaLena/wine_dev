@@ -1,22 +1,20 @@
-import React, { useEffect, useRef } from "react";
+// import React from "react";
 import {
   YMap,
   YMapDefaultSchemeLayer,
   YMapDefaultFeaturesLayer,
   YMapComponentsProvider,
-  YMapDefaultMarker,
   YMapMarker,
 } from "ymap3-components";
-import styles from "./YandexMapTour.module.css"
+// import styles from "./YandexMapTour.module.css"
 
 interface YandexMapTourProps {
   tourId: number;
-  tourTitle: string
   locationX: string;
   locationY: string;
 }
 
-function YandexMapTour({ tourId, tourTitle, locationX, locationY }: YandexMapTourProps) {
+function YandexMapTour({ tourId, locationX, locationY }: YandexMapTourProps) {
   return (
     <>
     <div style={{ width: "1200px", height: "500px" }}>
@@ -36,8 +34,8 @@ function YandexMapTour({ tourId, tourTitle, locationX, locationY }: YandexMapTou
         <YMapMarker
                 key={ tourId }
                 coordinates={[parseFloat(locationX), parseFloat(locationY)]}
-                color="#fc4c00"
-                popup={{content: tourTitle, position: 'left'}}
+                // color="#fc4c00"
+                // popup={{content: tourTitle, position: 'left'}}
               >
                 <img src='../../../public/wino pointer.ico'/>
                 </YMapMarker>

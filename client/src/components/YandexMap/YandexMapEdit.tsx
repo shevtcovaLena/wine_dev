@@ -1,4 +1,4 @@
-// import axios from "axios";
+// import React from "react";
 import { memo, useCallback, useEffect, useState } from "react";
 import {
   YMap,
@@ -8,23 +8,25 @@ import {
   YMapDefaultMarker,
   YMapListener,
 } from "ymap3-components";
-// import { features, LOCATION } from
-// import { YMapMyMarker } from "./YMapMyMarker"
 
-function YandexMapEdit({ coordinates, setCoordinates }) {
-  // const [markerTitle, setMarkerTitle] = useState();
-  // const [markerCoordinates, setMarkerCoordinates] = useState(null);
-  const [coordinatesTemp, setCoordinatesTemp] = useState([]);
+export type CoordType = [number, number]
 
-  // const clickCallback = (object,entity) => setCoordinates(() => entity.coordinates);
+interface IPropsMapEdit {
+  coordinates: CoordType,
+  setCoordinates: (value: React.SetStateAction<CoordType>) => void,
+}
 
-  const MemoizedMarker = memo(({ coord }) => (
+function YandexMapEdit({ coordinates, setCoordinates }: IPropsMapEdit) {
+  const [coordinatesTemp, setCoordinatesTemp] = useState<CoordType>([0, 0]);
+
+  const MemoizedMarker = memo(({ coord }: { coord: CoordType }) => (
     <YMapDefaultMarker coordinates={coord} />
   ));
 
-  const clickCallback = useCallback((object, entity) => {
+  const clickCallback = useCallback((object: unknown, entity: {coordinates:[number, number], screenCoordinates:[number, number]}) => {
+    console.log(object);
     setCoordinatesTemp(() => entity.coordinates);
-    setCoordinates(() => entity.coordinates);
+    setCoordinates(entity.coordinates);
   }, []);
 
   useEffect(() => {

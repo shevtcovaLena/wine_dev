@@ -1,22 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
 import {
-  Alert,
   Button,
   Card,
-  Cascader,
-  Checkbox,
-  ColorPicker,
-  DatePicker,
-  Flex,
+  // DatePicker,
   Form,
   Input,
-  InputNumber,
-  Radio,
-  Select,
-  Slider,
-  Switch,
-  TreeSelect,
   Upload,
   Row,
   Col,
@@ -24,18 +13,18 @@ import {
 } from "antd";
 import TourEditPageTableDate from "./TourEditPageTableDate";
 import axios from "axios";
-import YandexMapEdit from "../../components/YandexMap/YandexMapEdit";
+import YandexMapEdit, { CoordType } from "../../components/YandexMap/YandexMapEdit";
 import { useNavigate, useParams } from "react-router-dom";
-const { Title, Paragraph, Text, Link } = Typography;
+const { Title } = Typography;
 
-const { RangePicker } = DatePicker;
+// const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
-const boxStyle: React.CSSProperties = {
-  width: "100%",
-  height: "100%",
-  borderRadius: 6,
-};
+// const boxStyle: React.CSSProperties = {
+//   width: "100%",
+//   height: "100%",
+//   borderRadius: 6,
+// };
 
 const normFile = (e: any) => {
   console.log(e);
@@ -90,21 +79,21 @@ export function TourEditPage() {
   const [inputs, setInputs] = useState<IRegInput>(initRegInputs);
   const [tbDate, setTbDate] = useState<ITbDate>(initTbDate);
   const [valueNumberDay, setNumberDay] = useState(0);
-  const [coordinates, setCoordinates] = useState([0, 0]);
+  const [coordinates, setCoordinates] = useState<CoordType>([0, 0]);
   const [tbDateTemp, setTbDateTemp] = useState<ITbDate>(initTbDate);
 
   const formStateHandler = () => {
     setInputs(() => form.getFieldsValue());
   };
 
-  let _file = [
-    {
-      uid: "-1",
-      name: "",
-      status: "",
-      url: "",
-    },
-  ];
+  // let _file = [
+  //   {
+  //     uid: "-1",
+  //     name: "",
+  //     status: "",
+  //     url: "",
+  //   },
+  // ];
   const [MainFileImgFormData, uploadFileImgFormData] = useState();
   const [MainFileImg, uploadMainFileImg] = useState("");
   const handleFileChange = (info) => {
@@ -236,13 +225,12 @@ export function TourEditPage() {
               </Form.Item>
               <Form.Item
                 label="Описание"
-                name="description"
-                value={inputs.description}
+                name="description"                
               >
-                <TextArea rows={4} />
+                <TextArea rows={4} value={inputs.description}/>
               </Form.Item>
-              <Form.Item label="Цена" name="price" value={inputs.price}>
-                <Input prefix="₽" suffix="RUB" />
+              <Form.Item label="Цена" name="price">
+                <Input prefix="₽" suffix="RUB" value={inputs.price}/>
               </Form.Item>
               <Form.Item label="Даты туров">
                 <TourEditPageTableDate

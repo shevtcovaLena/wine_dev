@@ -1,20 +1,20 @@
-import { Button, Divider } from "antd";
+import { Button } from "antd";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   YMap,
   YMapDefaultSchemeLayer,
   YMapDefaultFeaturesLayer,
   YMapComponentsProvider,
-  YMapDefaultMarker,
   YMapMarker,
 } from "ymap3-components";
+import { ToursType } from "../../redux/ToursPage/toursTypes";
 // import { features, LOCATION } from
 
 function YandexMapMain() {
-  const [tours, setTours] = useState([]);
-  const [marker, setMarker] = useState(null);
+  const [tours, setTours] = useState<ToursType>([]);
+  const [marker, setMarker] = useState<number | null>(null);
 
   useEffect(() => {
     axios.get(`http://localhost:3009/api/tours/`).then((response) => {

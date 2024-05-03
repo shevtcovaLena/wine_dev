@@ -230,7 +230,6 @@ export function TourPage() {
           >
             <YandexMapTour
               tourId={tourPage.id}
-              tourTitle={tourPage.title}
               locationX={tourPage.location_y}
               locationY={tourPage.location_x}
             />
