@@ -1,8 +1,7 @@
-import React from "react";
-import { Carousel, Flex, Image, Space } from "antd";
+// import React from "react";
+import { Carousel, Flex, Image } from "antd";
 import YandexMapMain from "../../components/YandexMap/YandexMapMain";
 import Title from "antd/es/typography/Title";
-import { YMapComponentsProvider } from "ymap3-components";
 
 export function MainPage() {
   const contentStyle = {
@@ -17,18 +16,6 @@ export function MainPage() {
         className="elfsight-app-9fc07b51-1740-45ef-a506-3fe598d50a2d"
         data-elfsight-app-lazy
       ></div>
-
-      {/* <div style={{margin: '0 -48px'}}> */}
-      {/* <Carousel autoplay style={{height: '40vh', overflow: 'hidden', alignItems: "center", display: "flex", justifyContent: "center"}}> */}
-      {/* <div style={contentStyle}>
-        <video style={{ width: '100vw'}} controls={false} autoPlay loop muted >
-          <source src='winery.mp4' type="video/mp4"/>
-        </video>
-      </div> */}
-      {/* <div style={contentStyle}>
-        <Image preview={false} style={{ width: '100vw' }} src="massandra.jpg"/>
-      </div> */}
-
       <div
         style={{ margin: "0 -48px", position: "relative", overflow: "hidden" }}
       >
@@ -116,8 +103,6 @@ export function MainPage() {
             винного производства, вы можете подать заявку на добавление тура,
             зарегистрировавшись в качестве организатора.{" "}
           </Title>
-          {/* <div style={{marginTop: '30px', height: 5, backgroundColor: '#a18f63', width: '30%'}}></div> */}
-          {/* <div style={{marginBottom: '30px', height: 3, backgroundColor: '#8f812f', borderRadius: '10px', width: '10%'}}></div> */}
           <Title
             level={2}
             style={{
@@ -144,60 +129,3 @@ export function MainPage() {
     </>
   );
 }
-
-// import React from 'react';
-// import YandexMapMain from '../../components/YandexMap/YandexMapMain';
-// import { Carousel, Image } from 'antd';
-
-// export function MainPage() {
-//     return <>
-//       {/* <div style={{ width: "100%", maxHeight: "50vh", overflow: "hidden", alignItems: "center", display: "flex",
-// flexDirection: "column", justifyContent: "center"}}> */}
-//         <Carousel autoplay>
-//     <div style={contentStyle} >
-//     <img src="mainFont4.jpg" />
-//     </div>
-//     <div style={contentStyle} >
-//     <img src="mainFont.jpg" style={contentStyle} />
-//     </div>
-//     <div >
-//     <img src="mainFont2.jpg" style={contentStyle} />
-//     </div>
-//     <div>
-//     <img src="mainFont3.jpg" style={contentStyle} />
-//     </div>
-//   </Carousel>
-//         {/* </div> */}
-//       <YandexMapMain />
-//     </>;
-// }
-
-// import React from 'react';
-// import { Carousel, Image } from 'antd';
-// import YandexMapMain from '../../components/YandexMap/YandexMapMain';
-
-// export function MainPage() {
-//   const contentStyle = {
-//         width: '100%',
-//     // overflow: 'hidden',
-//   };
-
-//   return <>
-//      <Carousel autoplay>
-//       <div style={{overflow: 'hidden', height: '40vh'}}>
-//         <img src="mainFont4.jpg" style={contentStyle}/>
-//       </div>
-//       <div style={{overflow: 'hidden', height: '40vh'}}>
-//         <img src="mainFont.jpg" style={contentStyle} />
-//       </div>
-//       <div style={{overflow: 'hidden', height: '40vh'}}>
-//         <img src="mainFont2.jpg" style={contentStyle} />
-//       </div>
-//       <div style={{overflow: 'hidden', height: '40vh'}}>
-//         <img src="mainFont3.jpg" style={contentStyle} />
-//       </div>
-//     </Carousel>
-//    <YandexMapMain />
-//   </>;
-// }
-// height={200}

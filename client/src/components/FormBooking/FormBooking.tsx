@@ -30,7 +30,7 @@ const formatDate = (dateString: string) => {
   return date.toLocaleDateString("ru-RU", options);
 };
 
-type TourDateReservType = {
+export type TourDateReservType = {
   Reservation_tours: {
     id: number,
     user_id: number,

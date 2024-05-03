@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./TourPage.module.css";
-import FormBooking from "../../components/FormBooking/FormBooking";
+import FormBooking, { TourDateReservType } from "../../components/FormBooking/FormBooking";
 import YandexMapTour from "../../components/YandexMap/YandexMapTour";
 import Disqus from "../../components/Disqus/Disqus";
 import { Card, Rate, Button, Drawer, Space, message } from "antd";
@@ -43,7 +43,7 @@ export type RetingAverageType = { tour_id: number, average: number }
 export function TourPage() {
   const { id } = useParams();
   const [tourPage, setTourPage] = useState<TourPageType | null>(null);
-  const [tourDates, setTourDates] = useState<TourDateType[]>([]);
+  const [tourDates, setTourDates] = useState<TourDateReservType[]>([]);
   const [open, setOpen] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
   const user: IUser = useAppSelector((store) => store.userSlice.user);
@@ -80,9 +80,9 @@ export function TourPage() {
     return average.toFixed(1); // Вызов метода toFixed() на числовом значении
   };
 
-  async function fetchTourDates(tour_id: number): Promise<string[]> {
+  async function fetchTourDates(tour_id: number): Promise<TourDateReservType[]> {
     try {
-      const response = await axios.get<string[]>(
+      const response = await axios.get<TourDateReservType[]>(
         `http://localhost:3009/api/date/tour/${tour_id}`
       );
       return response.data;
@@ -97,7 +97,7 @@ export function TourPage() {
       const idAsNumber = parseInt(id);
       fetchTourDates(idAsNumber).then((dates) => {
         setTourDates(dates);
-        const seats = dates.map((date) => date.quantity_seats);
+        // const seats = dates.map((date) => date.quantity_seats);
       });
     }
   }, [id]);
@@ -236,7 +236,7 @@ export function TourPage() {
           </div>
           <Disqus url={""} identifier={""} />
           <Drawer
-            title="Чат"
+            title="Чат" 
             placement={"left"}
             size={"large"}
             width={"50%"}

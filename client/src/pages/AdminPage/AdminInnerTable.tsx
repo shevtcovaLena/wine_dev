@@ -1,25 +1,14 @@
-import React, { useEffect, useState, useRef } from "react";
-// import { DoubleRightOutlined, DownOutlined } from '@ant-design/icons';
-// import type { TableColumnsType } from 'antd';
-// import { ITour } from '../../redux/ToursPage/toursTypes';
-// import { IUser } from '../../redux/userSlice';
-// import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
 import {
   Badge,
-  Dropdown,
-  Space,
   Table,
-  Button,
-  Input,
   ConfigProvider,
 } from "antd";
 import axios from "axios";
 import { tourDateType } from "../ReservPage/ReservPage";
-import { SearchOutlined } from "@ant-design/icons";
-import type { InputRef, TableColumnsType, TableColumnType } from "antd";
-import type { FilterDropdownProps } from "antd/es/table/interface";
+import type { TableColumnsType } from "antd";
 
-interface ToureDateDataType extends tourDateType {
+interface TourDateDataType extends tourDateType {
   key: React.Key;
   status: "Завершен" | "Ожидается";
   start: string;
@@ -27,7 +16,7 @@ interface ToureDateDataType extends tourDateType {
 }
 
 export default function AdminInnerTable({ tourId }: { tourId: number }) {
-  const [toureDates, setToureDates] = useState([]);
+  const [toureDates, setToureDates] = useState<tourDateType[]>([]);
 
   useEffect(() => {
     axios
@@ -36,12 +25,12 @@ export default function AdminInnerTable({ tourId }: { tourId: number }) {
       .catch((error) => console.log(error));
   }, []);
 
-  const columns: TableColumnsType<ToureDateDataType> = [
+  const columns: TableColumnsType<TourDateDataType> = [
     {
       title: "Дата начала",
       dataIndex: "start",
       key: "start",
-      sorter: (a, b) => new Date(a.date) - new Date(b.date),
+      sorter: (a, b) => (new Date(a.date).getTime() - new Date(b.date).getTime()),
     },
     { title: "Дата окончания", dataIndex: "end", key: "end" },
     {
@@ -63,18 +52,9 @@ export default function AdminInnerTable({ tourId }: { tourId: number }) {
     },
   ];
 
-  // const data = [];
-  // for (let i = 0; i < 3; ++i) {
-  //   data.push({
-  //     key: i.toString(),
-  //     date: '2014-12-24 23:12:00',
-  //     name: 'This is production name',
-  //     upgradeNum: 'Upgraded: 56',
-  //   });
-  // }
 
-  const data: ToureDateDataType[] = toureDates.map(
-    (date: ToureDateDataType) => {
+  const data: TourDateDataType[] = toureDates.map(
+    (date: tourDateType) => {
       const status =
         new Date(date.date_end) > new Date() ? "Ожидается" : "Завершен";
       const start = new Date(date.date).toLocaleDateString();
