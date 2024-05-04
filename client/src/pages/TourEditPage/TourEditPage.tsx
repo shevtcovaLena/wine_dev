@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import {
   Button,
@@ -86,14 +86,6 @@ export function TourEditPage() {
     setInputs(() => form.getFieldsValue());
   };
 
-  // let _file = [
-  //   {
-  //     uid: "-1",
-  //     name: "",
-  //     status: "",
-  //     url: "",
-  //   },
-  // ];
   const [MainFileImgFormData, uploadFileImgFormData] = useState();
   const [MainFileImg, uploadMainFileImg] = useState("");
   const handleFileChange = (info) => {
@@ -143,6 +135,7 @@ export function TourEditPage() {
       navigate("/lk");
       // <Alert message="Записан!" type="success" />
     } else {
+      console.log("Ошибка записи в базу данных")
       // <Alert message="Ошибка!" type="error" />
     }
   };

@@ -83,11 +83,8 @@ export function ReservPage() {
       .get<number>(`http://localhost:3009/api/reserv/date/${dateTour.id}`)
       .then((response) => setReservCount(response.data))
       .catch((error) => console.log(error));
-  }, [dateTour, reservCount]);
-  
-  
-  ////-------------------------------------------------------------------------
-   
+  }, [dateTour, reservCount]);  
+    
   useEffect(() => {
     setInputs(() => ({ full_name: userInfo.full_name, telephone: userInfo.telephone }));
     form.setFieldsValue(inputs)    

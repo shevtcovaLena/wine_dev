@@ -1,8 +1,4 @@
-import React, { useState } from 'react';
-import { Space, Table, Tag } from 'antd';
-import type { TableProps } from 'antd';
-import ColumnGroup from 'antd/es/table/ColumnGroup';
-import Column from 'antd/es/table/Column';
+import React from 'react';
 import { fetchDeleteTour } from '../../redux/Traveler_tours/travelerThunkActions';
 import { useAppDispatch } from '../../redux/hooks';
 import { Button, Card, Flex, Typography } from 'antd';
@@ -11,14 +7,12 @@ import { Link } from 'react-router-dom';
 const cardStyle: React.CSSProperties = {
   width: 600,
   margin: '20px',
-
 };
 
 const imgStyle: React.CSSProperties = {
   display: 'block',
   width: 273,
 };
-
 
 export default function OneTravel({tour}) {
 
@@ -32,7 +26,7 @@ const dispatch = useAppDispatch();
 return(
     
 <Card style={cardStyle} styles={{ body: { padding: 0, overflow: 'hidden'} }}>
-    <Flex display='flex' key={tour.id}>
+    <Flex key={tour.id}>
       <img
         alt="wino"
         src={tour.tourImg? `/public/images/${tour.tourImg}`: 'mainFont3.jpg'}

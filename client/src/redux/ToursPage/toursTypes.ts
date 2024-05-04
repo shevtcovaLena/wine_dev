@@ -7,12 +7,12 @@ interface ITour {
     price: number,
     location_x: string,
     location_y: string,
-    status: string,
+    status: "new" | "allowed" | "canceled",
     length_days: number,
     path_img: string
   }
 
-export const initialTour = {
+export const initialTour: ITour = {
   id: 0,
   title: '',
   description: '',
@@ -21,7 +21,7 @@ export const initialTour = {
   price: 0,
   location_x: '',
   location_y: '',
-  status: '',
+  status: 'new',
   length_days: 0,
   path_img: '',
 }
