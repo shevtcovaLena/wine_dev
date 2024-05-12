@@ -15,6 +15,8 @@ import TourEditPageTableDate from "./TourEditPageTableDate";
 import axios from "axios";
 import YandexMapEdit, { CoordType } from "../../components/YandexMap/YandexMapEdit";
 import { useNavigate, useParams } from "react-router-dom";
+import { UploadChangeParam, UploadFile } from "antd/es/upload";
+import { tourDateType } from "../ReservPage/ReservPage";
 const { Title } = Typography;
 
 // const { RangePicker } = DatePicker;
@@ -26,7 +28,7 @@ const { TextArea } = Input;
 //   borderRadius: 6,
 // };
 
-const normFile = (e: any) => {
+const normFile = (e: UploadChangeParam) => {
   console.log(e);
   if (Array.isArray(e)) {
     return e;
@@ -88,7 +90,7 @@ export function TourEditPage() {
 
   const [MainFileImgFormData, uploadFileImgFormData] = useState();
   const [MainFileImg, uploadMainFileImg] = useState("");
-  const handleFileChange = (info) => {
+  const handleFileChange = (info: UploadChangeParam<UploadFile>) => {
     if (info.file.status === "done") {
       //  console.log(`Загруженный файл: ${info.fileList[0].response.newFileNmae}`);
       uploadMainFileImg(() => info.fileList[0].response.newFileNmae);
@@ -97,7 +99,7 @@ export function TourEditPage() {
     }
   };
 
-  const handleFileRemove = (file) => {
+  const handleFileRemove = (file: UploadFile) => {
     // console.log("handleFileRemove - file",file.response.newFileNmae)
     console.log(file);
     return axios
@@ -105,12 +107,12 @@ export function TourEditPage() {
         fileName: MainFileImg,
       })
       .then((response) => {
-        uploadFileImgFormData();
+        uploadFileImgFormData(undefined);
         console.log("Файл успешно удалён", response);
         return true;
       })
       .catch((error) => {
-        uploadFileImgFormData();
+        uploadFileImgFormData(undefined);
         console.log("Ошибка при удалении файла", error);
         return false;
       });
@@ -164,7 +166,7 @@ export function TourEditPage() {
           // Допустим, что arrDate и coordinates также возвращаются API
           // setTbDate({ arrDate: response.data.arrDate });
 
-          const arrDateTemp = Tour_dates.map((td) => {
+          const arrDateTemp = Tour_dates.map((td: tourDateType) => {
             return {
               key: td.id,
               dateStart: formatToDate(td.date),
@@ -210,11 +212,11 @@ export function TourEditPage() {
               layout="horizontal"
               style={{ width: "1000px" }}
             >
-              <Form.Item label="Заголовок" name="title" value={inputs.title}>
-                <Input />
+              <Form.Item label="Заголовок" name="title" >
+                <Input value={inputs.title}/>
               </Form.Item>
-              <Form.Item label="Регион" name="region" value={inputs.region}>
-                <Input />
+              <Form.Item label="Регион" name="region" >
+                <Input value={inputs.region}/>
               </Form.Item>
               <Form.Item
                 label="Описание"

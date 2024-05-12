@@ -34,7 +34,7 @@ router.post("/del_main", async (req, res) => {
     // console.log(req.file);
 
     const { fileName } = req.body;
-    const directoryPath = path.join(__dirname, "../../client/public/images");
+    const directoryPath = path.join(__dirname, "../../../client/public/images");
     const filePath = path.join(directoryPath, fileName);
 
     fs.unlink(filePath, (err) => {

@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, Divider, Flex, Space, Form, FormInstance, Input } from "antd";
+import { Avatar, Button, Card, Divider, Flex, Space, Form, Input } from "antd";
 import Title from "antd/es/typography/Title";
 import Text from "antd/es/typography/Text";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -10,6 +10,7 @@ import { CheckOutlined, EditOutlined, LoadingOutlined, PlusOutlined } from "@ant
 import { Upload, } from "antd";
 import type { UploadProps } from "antd";
 import { IUpdateInput } from "../../components/ReservUserForm/ReservUserForm";
+import { UploadFile } from "antd/lib/upload/interface";
 
 // type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
@@ -23,8 +24,8 @@ const UserInfo = () => {
   const userInfo: IUser = useAppSelector((store) => store.userSlice.userInfo);
 
   const [loading, setLoading] = useState(false);
-  const [AvatarFileImgFormData, uploadFileImgFormData] = useState();
-  const [AvatarFileImg, uploadAvatarFileImg] = useState<string>(userInfo.avatar);
+  const [AvatarFileImgFormData, uploadFileImgFormData] = useState<UploadFile[]>([]);
+  const [AvatarFileImg, uploadAvatarFileImg] = useState<string | undefined>(userInfo.avatar);
   const [showForm, setShowForm] = useState<boolean>(false);
   const [inputs, setInputs] = useState<IUpdateInput>(initUpdateInputs);
 
@@ -42,28 +43,21 @@ const UserInfo = () => {
   }, [userInfo]);
 
   useEffect(() => {
-    // if (userInfo.avatar) {
-      uploadAvatarFileImg(() => userInfo.avatar as string);
-    // }
+      uploadAvatarFileImg(userInfo.avatar as string);    
   }, [userInfo.avatar]);
 
-  // useEffect(() => {
-  //   if (userInfo.avatar) {
-  //     uploadAvatarFileImg(userInfo.avatar as string);
-  //   }
-  // }, []);
-
-  const handleChange: UploadProps["onChange"] = (info) => {
+   const handleChange: UploadProps["onChange"] = (info) => {
     if (info.file.status === "uploading") {
       setLoading(true);
       return;
     }
     if (info.file.status === "done") {
-      uploadAvatarFileImg(() => info.fileList[0].response.newFileNmae);
-      setLoading(false);
+      const fileList = [...info.fileList]; 
+      uploadFileImgFormData(fileList);
       void dispatch(
-        fetchUpdateUser({ avatar: info.fileList[0].response.newFileNmae })
+        fetchUpdateUser({ avatar: info.fileList[0].response.newFileName })
       );
+      setLoading(false);
     }
   };
 
@@ -167,23 +161,20 @@ const UserInfo = () => {
       <Form.Item
         label="Ф.И."
         name="full_name"
-        type="name"
-        value={inputs.full_name}
         rules={[
           { required: true, message: "Пожалуйста, введите фамилию и имя!" },
         ]}
       >
-        <Input placeholder="Иванов Иван" />
+        <Input type="name" value={inputs.full_name} placeholder="Иванов Иван" />
       </Form.Item>
       <Form.Item 
       label="Телефон" 
       name="telephone" 
-      value={inputs.telephone} 
       rules={[
         { required: true, message: "Пожалуйста, укажите номер телефона для связи!" },
         { pattern: /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/, message: 'Пожалуйста, введите номер не менее 11 цифр' }
         ]}>
-        <Input type="telephone" placeholder="+7**********" />
+        <Input value={inputs.telephone} type="telephone" placeholder="+7**********" />
       </Form.Item>
       <Form.Item>
         <Button type="primary" icon={<CheckOutlined />} onClick={handleSubmit}>
