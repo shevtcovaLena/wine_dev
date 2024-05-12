@@ -29,7 +29,7 @@ return(
     <Flex key={tour.id}>
       <img
         alt="wino"
-        src={tour.tourImg? `/public/images/${tour.tourImg}`: 'mainFont3.jpg'}
+        src={tour.tourImg? `http://localhost:3009/images/${tour.tourImg}`: 'mainFont3.jpg'}
         // src="../../../public/images/mockWine.jpg"
         style={imgStyle}
       />

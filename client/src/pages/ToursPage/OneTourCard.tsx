@@ -37,7 +37,7 @@ export default function OneTourCard({
                     alt="wine"
                     src={
                       tour.path_img
-                        ? `/public/images/${tour.path_img}`
+                        ? `http://localhost:3009/images/${tour.path_img}`
                         : "mainFont3.jpg"
                     }
                   />

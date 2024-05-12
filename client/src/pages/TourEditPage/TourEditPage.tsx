@@ -17,6 +17,7 @@ import YandexMapEdit, { CoordType } from "../../components/YandexMap/YandexMapEd
 import { useNavigate, useParams } from "react-router-dom";
 import { UploadChangeParam, UploadFile } from "antd/es/upload";
 import { tourDateType } from "../ReservPage/ReservPage";
+import { UploadFileStatus } from "antd/es/upload/interface";
 const { Title } = Typography;
 
 // const { RangePicker } = DatePicker;
@@ -88,7 +89,7 @@ export function TourEditPage() {
     setInputs(() => form.getFieldsValue());
   };
 
-  const [MainFileImgFormData, uploadFileImgFormData] = useState();
+  const [MainFileImgFormData, uploadFileImgFormData] = useState<UploadFile[]>([]);
   const [MainFileImg, uploadMainFileImg] = useState("");
   const handleFileChange = (info: UploadChangeParam<UploadFile>) => {
     if (info.file.status === "done") {
@@ -107,12 +108,12 @@ export function TourEditPage() {
         fileName: MainFileImg,
       })
       .then((response) => {
-        uploadFileImgFormData(undefined);
+        uploadFileImgFormData([]);
         console.log("Файл успешно удалён", response);
         return true;
       })
       .catch((error) => {
-        uploadFileImgFormData(undefined);
+        uploadFileImgFormData([]);
         console.log("Ошибка при удалении файла", error);
         return false;
       });
@@ -185,8 +186,8 @@ export function TourEditPage() {
               {
                 uid: "-1",
                 name: path_img,
-                status: "done",
-                url: `../public/images/${path_img}`,
+                status: "done" as UploadFileStatus,
+                url: `http://localhost:3009/images/${path_img}`,
               },
             ];
             uploadMainFileImg(path_img);

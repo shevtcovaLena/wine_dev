@@ -91,7 +91,7 @@ const UserInfo = () => {
           <div style={{ maxWidth: "600px", overflow: "hidden" }}>
             <img
               src={
-                AvatarFileImg ? `/public/images/${AvatarFileImg}` : "avatar.jpg"
+                AvatarFileImg ? `http://localhost:3009/images/${AvatarFileImg}` : "avatar.jpg"
               }
               style={{ maxHeight: "400px", width: '100%' }}
             />
@@ -114,7 +114,7 @@ const UserInfo = () => {
                       size={100}
                       src={
                         AvatarFileImg
-                          ? `/public/images/${AvatarFileImg}`
+                          ? `http://localhost:3009/images/${AvatarFileImg}`
                           : "avatar.jpg"
                       }
                       alt={userInfo.full_name}

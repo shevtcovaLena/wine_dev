@@ -161,7 +161,7 @@ export function TourPage() {
             </p>
           </span>
           <img
-            src={`/public/images/${tourPage.path_img}`}
+            src={`http://localhost:3009/images/${tourPage.path_img}`}
             alt={tourPage.title}
             className={styles.image}
           />

@@ -1,3 +1,4 @@
+// import React from "react";
 import { useEffect } from "react";
 import { ITour } from "../../redux/ToursPage/toursTypes";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";

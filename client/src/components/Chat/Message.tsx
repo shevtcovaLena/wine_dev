@@ -9,7 +9,7 @@ import { IMessageData } from "./Chat";
 // interface Props {}
 
 function Message({ message, isAuthor, avatar }: {message: IMessageData, isAuthor: boolean, avatar: string | undefined}) {
-  console.log(avatar? `/public/images/${avatar}` : "avatar.jpg")
+  console.log(avatar? `http://localhost:3009/images/${avatar}` : "avatar.jpg")
   return (
     <>
       {isAuthor ? (
@@ -17,7 +17,7 @@ function Message({ message, isAuthor, avatar }: {message: IMessageData, isAuthor
             <Avatar
               size={64}
               icon={<UserOutlined />}
-              src={`/public/images/${avatar}`}
+              src={`http://localhost:3009/images/${avatar}`}
               alt="avatar"
             />
         <Card type={"inner"} style={{ minWidth: '60%', backgroundColor: '#D7F3D3', position: 'relative'}}>

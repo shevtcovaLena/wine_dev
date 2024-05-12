@@ -86,7 +86,7 @@ const user = useAppSelector((store) => store.userSlice.user);
       size={48}
       src={
         user.avatar
-          ? `/public/images/${user.avatar}`
+          ? `http://localhost:3009/images/${user.avatar}`
           : "/public/avatar.jpg"
       }
       alt={user.full_name}

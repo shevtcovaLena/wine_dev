@@ -268,6 +268,6 @@ export default function TourEditPageTableDate({tbDate,tbDateTemp, setTbDate, val
       />
     </div>
   );
-};
+}
 
 // export default TourEditPageTableDate;

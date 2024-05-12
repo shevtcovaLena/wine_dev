@@ -60,7 +60,7 @@ function YandexMapMain() {
                         </h4>
                       </Link>{" "}
                       <img
-                        src={`/images/${el.path_img}`}
+                        src={`http://localhost:3009/images/${el.path_img}`}
                         alt="photo"
                         style={{
                           justifyContent: "space-around",
