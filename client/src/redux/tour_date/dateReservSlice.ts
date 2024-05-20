@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchTours } from './dateReservThunkActions';
+import { ToursType } from '../ToursPage/toursTypes';
 
 
 
@@ -35,4 +36,4 @@ const toursSlice = createSlice({
 });
 
 export default toursSlice.reducer;
-export const {filterTours} = toursSlice.actions;
+// export const {filterTours} = toursSlice.actions;
