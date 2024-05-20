@@ -24,8 +24,9 @@ const travelerSlice = createSlice({
     builder.addCase(
       fetchTravelerTours.fulfilled,
       (state, { payload }) => {
-        state.travelerTours = payload;
-        state.isLoading = false;
+        if (payload) { 
+          state.travelerTours = payload;
+      }
       }
     ),
       builder.addCase(fetchDeleteTour.fulfilled, (state, { payload }) => {

@@ -1,5 +1,3 @@
-import { useState } from "react";
-// import './App.css'
 import { Route, Routes } from "react-router-dom";
 import { MainPage } from "./pages/MainPage/MainPage";
 import { Navbar } from "./components/Navbar/Navbar";
@@ -15,8 +13,6 @@ import { ReservPage } from "./pages/ReservPage/ReservPage";
 import { TourEditPage } from "./pages/TourEditPage/TourEditPage";
 import { Lk } from "./components/Navbar/Lk";
 import { GithubOutlined } from "@ant-design/icons";
-// import { useAppSelector } from "./redux/hooks";
-// import { IUser } from "./redux/userSlice";
 import ruRU from 'antd/locale/ru_RU';
 
 import dayjs from 'dayjs';
@@ -74,12 +70,7 @@ function App() {
               <Route path="/tour/:id" element={<TourPage />} />
               <Route path="/tour_edit/:id" element={<TourEditPage />} />
               <Route path="/lk" element={<Lk />} />
-              {/* <Route element={<ProtectedRoute isAuth={Boolean(user.full_name)} redirectTo="/"  />}> */}
               <Route path="/tour/date/:id" element={<ReservPage />} />
-              {/* </Route> */}
-              {/* <Route path="/traveler" element={<TravelerPage />} />
-              <Route path="/admin" element={<AdminPage />} />
-              <Route path="/pa_organizer" element={<OrganizerPage />} /> */}
             </Routes>
           </Content>
           <Footer
@@ -149,7 +140,6 @@ function App() {
                   115419, г. Москва, муниципальный округ Донской вн.тер.г., ул.
                   Орджоникидзе, д. 11
                 </h4>
-                {/* <img src="../public/grape_11854636.png" alt="grape" style={{width: '20px', height:'20px'}} /> */}
               </div>
             </Flex>
             <h4>Copyright 2024 © Все права очень защищены.</h4>
