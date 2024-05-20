@@ -20,7 +20,7 @@ export default function AdminInnerTable({ tourId }: { tourId: number }) {
 
   useEffect(() => {
     axios
-      .get<tourDateType[]>(`http://localhost:3009/api/date//tour/${tourId}`)
+      .get<tourDateType[]>(`https://wine-server-shevtsova.amvera.io/api/date//tour/${tourId}`)
       .then((response) => setToureDates(response.data))
       .catch((error) => console.log(error));
   }, []);

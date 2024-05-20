@@ -60,14 +60,14 @@ export function ReservPage() {
   useEffect(() => {
     void dispatch(fetchTours());
     axios
-      .get<tourDateType>(`http://localhost:3009/api/date/${id}`)
+      .get<tourDateType>(`https://wine-server-shevtsova.amvera.io/api/date/${id}`)
       .then((response) => setDateTour(response.data))
       .catch((error) => console.log(error));
   }, []);
 
   useEffect(() => {
     axios
-      .get<IUser>(`http://localhost:3009/api/user/${userSession.id}`)
+      .get<IUser>(`https://wine-server-shevtsova.amvera.io/api/user/${userSession.id}`)
       .then((response) => setUserInfo(response.data))
       .catch((error) => console.log(error));
   }, [userSession]);
@@ -81,7 +81,7 @@ export function ReservPage() {
 
   useEffect(() => {
     axios
-      .get<number>(`http://localhost:3009/api/reserv/date/${dateTour.id}`)
+      .get<number>(`https://wine-server-shevtsova.amvera.io/api/reserv/date/${dateTour.id}`)
       .then((response) => setReservCount(response.data))
       .catch((error) => console.log(error));
   }, [dateTour, reservCount]);  
@@ -105,7 +105,7 @@ export function ReservPage() {
     try {
       await form.validateFields();
       void dispatch(fetchUpdateUser(inputs as IUpdateInput));
-      const response = await axios.post(`http://localhost:3009/api/reserv/`, reservFetchBody, {withCredentials: true });
+      const response = await axios.post(`https://wine-server-shevtsova.amvera.io/api/reserv/`, reservFetchBody, {withCredentials: true });
       if (response.status === 200) {
         navigate('/lk');        
         }              

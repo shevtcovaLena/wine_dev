@@ -91,7 +91,7 @@ const UserInfo = () => {
           <div style={{ maxWidth: "600px", overflow: "hidden" }}>
             <img
               src={
-                AvatarFileImg ? `http://localhost:3009/images/${AvatarFileImg}` : "avatar.jpg"
+                AvatarFileImg ? `https://wine-server-shevtsova.amvera.io/images/${AvatarFileImg}` : "avatar.jpg"
               }
               style={{ maxHeight: "400px", width: '100%' }}
             />
@@ -104,7 +104,7 @@ const UserInfo = () => {
                   listType="picture-circle"
                   className="avatar-uploader"
                   showUploadList={false}
-                  action="http://localhost:3009/api/upload_image/main"
+                  action="https://wine-server-shevtsova.amvera.io/api/upload_image/main"
                 //   beforeUpload={beforeUpload}
                   onChange={handleChange}
                   fileList={AvatarFileImgFormData}
@@ -114,7 +114,7 @@ const UserInfo = () => {
                       size={100}
                       src={
                         AvatarFileImg
-                          ? `http://localhost:3009/images/${AvatarFileImg}`
+                          ? `https://wine-server-shevtsova.amvera.io/images/${AvatarFileImg}`
                           : "avatar.jpg"
                       }
                       alt={userInfo.full_name}

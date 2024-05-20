@@ -58,7 +58,7 @@ export default function TravelerPage() {
 
   const sendRatingToServer = async (userId: number, tourId: number, rating: number) => {
     try {
-      const response = await axios.post('http://localhost:3009/api/ratings', {
+      const response = await axios.post('https://wine-server-shevtsova.amvera.io/api/ratings', {
         user_id: userId,
         tour_id: tourId,
         rate: rating

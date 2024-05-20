@@ -17,7 +17,7 @@ function YandexMapMain() {
   const [marker, setMarker] = useState<number | null>(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:3009/api/tours/`).then((response) => {
+    axios.get(`https://wine-server-shevtsova.amvera.io/api/tours/`).then((response) => {
       setTours(response.data);
     });
   }, []);
@@ -60,7 +60,7 @@ function YandexMapMain() {
                         </h4>
                       </Link>{" "}
                       <img
-                        src={`http://localhost:3009/images/${el.path_img}`}
+                        src={`https://wine-server-shevtsova.amvera.io/images/${el.path_img}`}
                         alt="photo"
                         style={{
                           justifyContent: "space-around",

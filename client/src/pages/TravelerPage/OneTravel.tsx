@@ -34,7 +34,7 @@ return(
     <Flex key={tour.id}>
       <img
         alt="wino"
-        src={tour.tourImg? `http://localhost:3009/images/${tour.tourImg}`: 'mainFont3.jpg'}
+        src={tour.tourImg? `https://wine-server-shevtsova.amvera.io/images/${tour.tourImg}`: 'mainFont3.jpg'}
         style={imgStyle}
       />
       

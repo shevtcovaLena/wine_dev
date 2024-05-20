@@ -5,7 +5,7 @@ import { ToursType } from './toursTypes';
 
 export const fetchTours = createAsyncThunk('tours/all', async () => { // 'posts/all' = это не URL
   try {
-    const response = await axios.get<ToursType>(`http://localhost:3009/api/tours/`); // URL ТУТ
+    const response = await axios.get<ToursType>(`https://wine-server-shevtsova.amvera.io/api/tours/`); // URL ТУТ
     
     return response.data; //* это payload
   } catch (error) {
@@ -16,7 +16,7 @@ export const fetchTours = createAsyncThunk('tours/all', async () => { // 'posts/
 
 export const fetchTourCancel = createAsyncThunk('tours/cancel', async (id : number) => {
   try {
-    const response = await axios.patch<ToursType>(`http://localhost:3009/api//tour_edit/cancel/${id}`);
+    const response = await axios.patch<ToursType>(`https://wine-server-shevtsova.amvera.io/api//tour_edit/cancel/${id}`);
     if (response.status === 200) {
       return id
   }
@@ -28,7 +28,7 @@ export const fetchTourCancel = createAsyncThunk('tours/cancel', async (id : numb
 
 export const fetchTourAllow = createAsyncThunk('tours/allow', async (id : number) => {
   try {
-    const response = await axios.patch<ToursType>(`http://localhost:3009/api//tour_edit/allow/${id}`);
+    const response = await axios.patch<ToursType>(`https://wine-server-shevtsova.amvera.io/api//tour_edit/allow/${id}`);
     if (response.status === 200) {
       return true
   }

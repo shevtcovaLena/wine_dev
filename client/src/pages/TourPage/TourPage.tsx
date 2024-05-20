@@ -54,7 +54,7 @@ export function TourPage() {
 
   useEffect(() => {
     axios
-      .get<TourPageType>(`http://localhost:3009/api/tour?tour_id=${id}`)
+      .get<TourPageType>(`https://wine-server-shevtsova.amvera.io/api/tour?tour_id=${id}`)
       .then((response) => setTourPage(response.data))
       .catch((error) => console.log(error));
     navigate({ hash: "#disqus_thread" });
@@ -64,7 +64,7 @@ export function TourPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3009/api/ratings/average")
+      .get("https://wine-server-shevtsova.amvera.io/api/ratings/average")
       .then((response) => {
         setTourRatings(response.data);
       })
@@ -83,7 +83,7 @@ export function TourPage() {
   async function fetchTourDates(tour_id: number): Promise<TourDateReservType[]> {
     try {
       const response = await axios.get<TourDateReservType[]>(
-        `http://localhost:3009/api/date/tour/${tour_id}`
+        `https://wine-server-shevtsova.amvera.io/api/date/tour/${tour_id}`
       );
       return response.data;
     } catch (error) {
@@ -161,7 +161,7 @@ export function TourPage() {
             </p>
           </span>
           <img
-            src={`http://localhost:3009/images/${tourPage.path_img}`}
+            src={`https://wine-server-shevtsova.amvera.io/images/${tourPage.path_img}`}
             alt={tourPage.title}
             className={styles.image}
           />

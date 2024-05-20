@@ -8,7 +8,7 @@
   
     cursor: pointer;
     transform: translate(-50%, -50%);
-    background-image: url('http://localhost:3009/images/tour1.png');
+    background-image: url('https://wine-server-shevtsova.amvera.io/images/tour1.png');
   }
   
   .popup {

@@ -44,7 +44,7 @@ export default function OrganizerPage() {
 
   const fetchTourData = async () => {
     const response = await axios.get(
-      "http://localhost:3009/api/organizer/active",
+      "https://wine-server-shevtsova.amvera.io/api/organizer/active",
       { withCredentials: true }
     );
     return response.data;
@@ -52,7 +52,7 @@ export default function OrganizerPage() {
 
   const fetchTours = async () => {
     const response = await axios.get(
-      "http://localhost:3009/api/organizer/tours",
+      "https://wine-server-shevtsova.amvera.io/api/organizer/tours",
       { withCredentials: true }
     );
     return response.data;

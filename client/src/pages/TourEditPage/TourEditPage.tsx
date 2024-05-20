@@ -103,7 +103,7 @@ export function TourEditPage() {
   const handleFileRemove = (file: UploadFile) => {
     console.log(file);
     return axios
-      .post("http://localhost:3009/api/upload_image/del_main", {
+      .post("https://wine-server-shevtsova.amvera.io/api/upload_image/del_main", {
         fileName: MainFileImg,
       })
       .then((response) => {
@@ -128,7 +128,7 @@ export function TourEditPage() {
     };
 
     const respons = await axios.post(
-      `http://localhost:3009/api/tour_edit?tour_id=${id}`,
+      `https://wine-server-shevtsova.amvera.io/api/tour_edit?tour_id=${id}`,
       postDataHTTP,
       { withCredentials: true }
     );
@@ -143,7 +143,7 @@ export function TourEditPage() {
   useEffect(() => {
     if (id !== "-1") {
       axios
-        .get(`http://localhost:3009/api/tour_edit/tour_data?tour_id=${id}`)
+        .get(`https://wine-server-shevtsova.amvera.io/api/tour_edit/tour_data?tour_id=${id}`)
         .then((response) => {
           const {
             title,
@@ -182,7 +182,7 @@ export function TourEditPage() {
                 uid: "-1",
                 name: path_img,
                 status: "done" as UploadFileStatus,
-                url: `http://localhost:3009/images/${path_img}`,
+                url: `https://wine-server-shevtsova.amvera.io/images/${path_img}`,
               },
             ];
             uploadMainFileImg(path_img);
@@ -240,7 +240,7 @@ export function TourEditPage() {
                 <Upload
                   maxCount={1}
                   name="main"
-                  action="http://localhost:3009/api/upload_image/main"
+                  action="https://wine-server-shevtsova.amvera.io/api/upload_image/main"
                   listType="picture"
                   onChange={handleFileChange}
                   onRemove={handleFileRemove}

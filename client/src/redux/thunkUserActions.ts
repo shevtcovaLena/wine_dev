@@ -5,7 +5,7 @@ import { IUpdateInput } from "../components/ReservUserForm/ReservUserForm";
 
 export const fetchRegUser = createAsyncThunk('user/reg', async (inputs: IUser) => {
     try {
-        const response = await axios.post(`http://localhost:3009/api/user/reg`, inputs, {withCredentials: true });
+        const response = await axios.post(`https://wine-server-shevtsova.amvera.io/api/user/reg`, inputs, {withCredentials: true });
         if (response.status === 200) {
             return response.data
         }
@@ -16,7 +16,7 @@ export const fetchRegUser = createAsyncThunk('user/reg', async (inputs: IUser) =
 
 export const fetchUpdateUser = createAsyncThunk('user/update', async (inputs: IUpdateInput) => {
     try {
-        const response = await axios.patch(`http://localhost:3009/api/user/`, inputs, {withCredentials: true });
+        const response = await axios.patch(`https://wine-server-shevtsova.amvera.io/api/user/`, inputs, {withCredentials: true });
         if (response.status === 200) {
             return response.data
         }
@@ -27,7 +27,7 @@ export const fetchUpdateUser = createAsyncThunk('user/update', async (inputs: IU
 
 export const fetchLogUser = createAsyncThunk('user/log', async (inputs: IUser) => {
     try {
-        const response = await axios.post(`http://localhost:3009/api/user/login`, inputs, {withCredentials: true });
+        const response = await axios.post(`https://wine-server-shevtsova.amvera.io/api/user/login`, inputs, {withCredentials: true });
         if (response.status === 200) {
             return response.data
         }
@@ -38,7 +38,7 @@ export const fetchLogUser = createAsyncThunk('user/log', async (inputs: IUser) =
 
 export const fetchUserInfo = createAsyncThunk('user/check', async () => {
     try {
-        const response = await axios.get<IUser>('http://localhost:3009/api/user/', {withCredentials: true });
+        const response = await axios.get<IUser>('https://wine-server-shevtsova.amvera.io/api/user/', {withCredentials: true });
         return response.data;
     } catch (error) {
         console.log(error);
@@ -47,7 +47,7 @@ export const fetchUserInfo = createAsyncThunk('user/check', async () => {
 
 export const fetchUserFull = createAsyncThunk('user/full', async () => {
     try {
-        const response = await axios.get<IUser>('http://localhost:3009/api/user/full', {withCredentials: true });
+        const response = await axios.get<IUser>('https://wine-server-shevtsova.amvera.io/api/user/full', {withCredentials: true });
         return response.data;
     } catch (error) {
         console.log(error);
@@ -56,7 +56,7 @@ export const fetchUserFull = createAsyncThunk('user/full', async () => {
 
 export const fetchLogoutUser = createAsyncThunk('user/logout', async () => {
     try {
-        const response = await axios.get<IUser>('http://localhost:3009/api/user/logout', {withCredentials: true });
+        const response = await axios.get<IUser>('https://wine-server-shevtsova.amvera.io/api/user/logout', {withCredentials: true });
         if (response.status === 200) {
             return true
         }

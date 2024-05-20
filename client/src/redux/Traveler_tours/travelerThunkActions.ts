@@ -9,7 +9,7 @@ export const fetchTravelerTours = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get<TravelerToursType>(
-        `http://localhost:3009/api/traveler`,
+        `https://wine-server-shevtsova.amvera.io/api/traveler`,
         { withCredentials: true }
       );
       return response.data;
@@ -24,7 +24,7 @@ export const fetchDeleteTour = createAsyncThunk(
 
   async (id: number) => {
     const response = await axios.delete(
-      `http://localhost:3009/api/traveler/${id}`,
+      `https://wine-server-shevtsova.amvera.io/api/traveler/${id}`,
       { withCredentials: true }
     );
     if (response.status === 200) {

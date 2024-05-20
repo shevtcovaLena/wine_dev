@@ -35,7 +35,7 @@ const AdminTable: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get<DataType[]>(`http://localhost:3009/api/tours/extended`)
+      .get<DataType[]>(`https://wine-server-shevtsova.amvera.io/api/tours/extended`)
       .then((response) => setExtendedTours(response.data))
       .catch((error) => console.log(error));
   }, []);
