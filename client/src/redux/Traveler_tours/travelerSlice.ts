@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { TravelerToursType } from "./travelerTourTypes";
 import { fetchDeleteTour, fetchTravelerTours } from "./travelerThunkActions";
 
@@ -6,8 +6,8 @@ export type TravelerStateType = {
   travelerTours: TravelerToursType;
   isLoading: boolean;
 };
-//начальное состояние
-const initialState:TravelerStateType = {
+
+const initialState: TravelerStateType = {
   travelerTours: [],
   isLoading: true,
 };
@@ -21,10 +21,13 @@ const travelerSlice = createSlice({
       state.isLoading = true;
     });
 
-    builder.addCase(fetchTravelerTours.fulfilled, (state, action: PayloadAction<TravelerToursType>) => {
-      state.travelerTours = action.payload;
-      state.isLoading = false;
-    }),
+    builder.addCase(
+      fetchTravelerTours.fulfilled,
+      (state, { payload }) => {
+        state.travelerTours = payload;
+        state.isLoading = false;
+      }
+    ),
       builder.addCase(fetchDeleteTour.fulfilled, (state, { payload }) => {
         state.travelerTours = state.travelerTours.filter(
           (el) => el.id !== payload

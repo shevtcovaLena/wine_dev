@@ -73,18 +73,8 @@ export default function TravelerPage() {
 
   const rateTour = (tourId: number, rating: number) => {
     if(userId) {
-      saveRatingToLocalStorage(tourId, rating);
-    
-      sendRatingToServer(userId, tourId, rating)
-        // .then(() => {
-        //   setRatedTours(prevState => ({
-        //     ...prevState,
-        //     [tourId]: true
-        //   }));
-        // })
-        .catch(error => {
-          console.error('Error rating tour:', error);
-        });
+      saveRatingToLocalStorage(tourId, rating);    
+      sendRatingToServer(userId, tourId, rating)      
     }
   };
 
@@ -128,7 +118,6 @@ export default function TravelerPage() {
           ))
         )}
       </div>
-      {/* <Chat/> */}
       <Drawer
         title="Мой календарь"
         placement={"right"}

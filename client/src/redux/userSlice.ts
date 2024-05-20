@@ -65,7 +65,6 @@ const userSlice = createSlice({
                 state.user = payload;
                 state.logStatus=true;
                 state.msg = ''
-                // console.log('Стэйт юзера',state.user)
             }
         })
         builder.addCase(fetchUserInfo.fulfilled, (state, { payload })=> {

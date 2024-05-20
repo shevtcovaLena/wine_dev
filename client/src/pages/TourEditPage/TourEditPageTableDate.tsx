@@ -1,11 +1,21 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import type { DatePickerProps, GetRef, InputRef } from 'antd';
-import { Button, DatePicker, Form, Input, InputNumber, Popconfirm, Table } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
+import React, { useContext, useEffect, useRef, useState } from "react";
+import type { DatePickerProps, GetRef, InputRef } from "antd";
+import {
+  Button,
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  Popconfirm,
+  Table,
+} from "antd";
+import { DeleteOutlined } from "@ant-design/icons";
+import { ITbDate } from "./TourEditPage";
+import type { Dayjs } from "dayjs";
 
 type FormInstance<T> = GetRef<typeof Form<T>>;
 
-const EditableContext = React.createContext<FormInstance<any> | null>(null);
+const EditableContext = React.createContext<FormInstance<unknown> | null>(null);
 
 interface Item {
   key: string;
@@ -19,6 +29,7 @@ interface EditableRowProps {
 }
 
 const EditableRow: React.FC<EditableRowProps> = ({ index, ...props }) => {
+  console.log(index);
   const [form] = Form.useForm();
   return (
     <Form form={form} component={false}>
@@ -67,9 +78,9 @@ const EditableCell: React.FC<EditableCellProps> = ({
       const values = await form.validateFields();
 
       toggleEdit();
-      handleSave({ ...record, ...values });
+      handleSave({ ...record, ...(values as Item) });
     } catch (errInfo) {
-      console.log('Save failed:', errInfo);
+      console.log("Save failed:", errInfo);
     }
   };
 
@@ -90,7 +101,11 @@ const EditableCell: React.FC<EditableCellProps> = ({
         <Input ref={inputRef} onPressEnter={save} onBlur={save} />
       </Form.Item>
     ) : (
-      <div className="editable-cell-value-wrap" style={{ paddingRight: 24 }} onClick={toggleEdit}>
+      <div
+        className="editable-cell-value-wrap"
+        style={{ paddingRight: 24 }}
+        onClick={toggleEdit}
+      >
         {children}
       </div>
     );
@@ -106,42 +121,53 @@ interface DataType {
   dateStart: string;
   dateEnd: string;
   quantity_seats: number;
+  date_id?: number;
+  isDeletable?: boolean;
 }
 
-type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
+type ColumnTypes = Exclude<EditableTableProps["columns"], undefined>;
 
-export default function TourEditPageTableDate({tbDate,tbDateTemp, setTbDate, valueNumberDay, setNumberDay}) {
-  const [currDate, setCurrDate] = useState();
-  const [currDateStr, setCurrDateStr] = useState();
+interface IPropsEditTableDate {
+  tbDateTemp: ITbDate;
+  setTbDate: React.Dispatch<React.SetStateAction<ITbDate>>;
+  valueNumberDay: number;
+  setNumberDay: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export default function TourEditPageTableDate({
+  tbDateTemp,
+  setTbDate,
+  valueNumberDay,
+  setNumberDay,
+}: IPropsEditTableDate) {
+  const [currDate, setCurrDate] = useState<Dayjs | null | undefined>();
+  const [currDateStr, setCurrDateStr] = useState<string>("");
 
   function addDaysToDate(dateStr: string, daysToAdd: number): string {
     const date = new Date(dateStr);
-    date.setDate(date.getDate() + daysToAdd); // Добавляем дни
-  
+    date.setDate(date.getDate() + daysToAdd);
+
     // Форматируем дату обратно в строку
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Месяцы начинаются с 0
-    const day = String(date.getDate()).padStart(2, '0');
-  
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Месяцы начинаются с 0
+    const day = String(date.getDate()).padStart(2, "0");
+
     return `${year}-${month}-${day}`;
   }
 
-  const onDateChange: DatePickerProps['onChange'] = (date, dateString) => {
-    // console.log(date, dateString);
-    setCurrDate(() => date)
-    setCurrDateStr(() => dateString)
+  const onDateChange: DatePickerProps["onChange"] = (date, dateString) => {
+    setCurrDate(() => date);
+    setCurrDateStr(() => dateString as string);
   };
 
-  // const [valueNumberDay, setNumberDay] = useState();
-  const onNumberChange = (value) => {
-    // console.log('changed', value);
-    setNumberDay(() => value);
+  const onNumberChange = (value: number | null) => {
+    setNumberDay(() => value as number);
   };
 
-  const [quantitySeats, setQuantitySeats] = useState();
-  const onNumberQuantitySeats = (value) => {
+  const [quantitySeats, setQuantitySeats] = useState<number>(0);
+  const onNumberQuantitySeats = (value: number) => {
     setQuantitySeats(() => value);
-  }
+  };
 
   const [dataSource, setDataSource] = useState<DataType[]>([]);
 
@@ -152,54 +178,58 @@ export default function TourEditPageTableDate({tbDate,tbDateTemp, setTbDate, val
     setDataSource(newData);
   };
 
-  const defaultColumns: (ColumnTypes[number] & { editable?: boolean; dataIndex: string })[] = [
+  const defaultColumns: (ColumnTypes[number] & {
+    editable?: boolean;
+    dataIndex: string;
+  })[] = [
     {
-      title: 'Дата начала',
-      dataIndex: 'dateStart',
-      width: '35%',
+      title: "Дата начала",
+      dataIndex: "dateStart",
+      width: "35%",
       // editable: true,
     },
     {
-      title: 'Дата конец',
-      width: '35%',
-      dataIndex: 'dateEnd',
+      title: "Дата конец",
+      width: "35%",
+      dataIndex: "dateEnd",
     },
     {
-      title: 'Мест',
-      width: '20%',
-      dataIndex: 'quantity_seats',
+      title: "Мест",
+      width: "20%",
+      dataIndex: "quantity_seats",
       editable: true,
     },
     {
-      title: '',
-      dataIndex: 'operation',
-      render: (_, record) =>{
-        // Проверяем, можно ли удалять эту конкретную строку
+      title: "",
+      dataIndex: "operation",
+      render: (_, record) => {
         if (record.isDeletable) {
           return (
-            <Popconfirm title="Удалить?" onConfirm={() => handleDelete(record.key)}>
+            <Popconfirm
+              title="Удалить?"
+              onConfirm={() => handleDelete(record.key)}
+            >
               <DeleteOutlined />
             </Popconfirm>
           );
         }
         return null; // Или вернуть пустой элемент, если удаление не разрешено
-      }
+      },
     },
   ];
 
   const handleAdd = () => {
+    if (currDateStr === "") return;
 
-    if (currDateStr === "") return
+    const endDate = addDaysToDate(currDateStr, valueNumberDay);
 
-    const endDate = addDaysToDate(currDateStr,valueNumberDay)
-    
     const newData: DataType = {
       key: count,
       dateStart: currDateStr,
       dateEnd: endDate,
       quantity_seats: quantitySeats,
       date_id: -1,
-      isDeletable: true
+      isDeletable: true,
     };
     setDataSource([...dataSource, newData]);
     setCount(count + 1);
@@ -208,14 +238,13 @@ export default function TourEditPageTableDate({tbDate,tbDateTemp, setTbDate, val
   };
 
   useEffect(() => {
-    setTbDate(tbDate => ({ ...tbDate, arrDate: dataSource }));
+    setTbDate((tbDate) => ({ ...tbDate, arrDate: dataSource }));
   }, [dataSource]);
 
   useEffect(() => {
-    console.log(tbDateTemp.arrDate)
-    setDataSource(() => tbDateTemp.arrDate);
-    
-  },[tbDateTemp])
+    console.log(tbDateTemp.arrDate);
+    setDataSource(() => tbDateTemp.arrDate as DataType[]);
+  }, [tbDateTemp]);
 
   const handleSave = (row: DataType) => {
     const newData = [...dataSource];
@@ -253,15 +282,30 @@ export default function TourEditPageTableDate({tbDate,tbDateTemp, setTbDate, val
 
   return (
     <div>
-      <DatePicker onChange={onDateChange} value={currDate} placeholder="Дата начало" />
-      <InputNumber min={1} max={15} placeholder="Дней" value={valueNumberDay} onChange={onNumberChange}/>
-      <InputNumber min={1} max={30} placeholder="Мест" onChange={onNumberQuantitySeats}/>
+      <DatePicker
+        onChange={onDateChange}
+        value={currDate}
+        placeholder="Дата начало"
+      />
+      <InputNumber
+        min={1}
+        max={15}
+        placeholder="Дней"
+        value={valueNumberDay}
+        onChange={onNumberChange}
+      />
+      <InputNumber
+        min={1}
+        max={30}
+        placeholder="Мест"
+        onChange={onNumberQuantitySeats as (value:1 | 30 | null) => void}
+      />
       <Button onClick={handleAdd} type="primary" style={{ marginBottom: 16 }}>
         Добавить дату
       </Button>
       <Table
         components={components}
-        rowClassName={() => 'editable-row'}
+        rowClassName={() => "editable-row"}
         bordered
         dataSource={dataSource}
         columns={columns as ColumnTypes}
@@ -269,5 +313,3 @@ export default function TourEditPageTableDate({tbDate,tbDateTemp, setTbDate, val
     </div>
   );
 }
-
-// export default TourEditPageTableDate;

@@ -3,6 +3,7 @@ import { fetchDeleteTour } from '../../redux/Traveler_tours/travelerThunkActions
 import { useAppDispatch } from '../../redux/hooks';
 import { Button, Card, Flex, Typography } from 'antd';
 import { Link } from 'react-router-dom';
+import { ITravelerTour } from '../../redux/Traveler_tours/travelerTourTypes';
 
 const cardStyle: React.CSSProperties = {
   width: 600,
@@ -14,12 +15,16 @@ const imgStyle: React.CSSProperties = {
   width: 273,
 };
 
-export default function OneTravel({tour}) {
+interface Props {
+  tour: ITravelerTour;
+}
+
+export default function OneTravel({tour}: Props) {
 
 const dispatch = useAppDispatch();
 
-  const deleteHandler = async (): Promise<void> => {
-    void dispatch(fetchDeleteTour(tour.id));
+  const deleteHandler = async (id: number): Promise<void> => {
+    void dispatch(fetchDeleteTour(id));
   };
 
   
@@ -30,7 +35,6 @@ return(
       <img
         alt="wino"
         src={tour.tourImg? `http://localhost:3009/images/${tour.tourImg}`: 'mainFont3.jpg'}
-        // src="../../../public/images/mockWine.jpg"
         style={imgStyle}
       />
       

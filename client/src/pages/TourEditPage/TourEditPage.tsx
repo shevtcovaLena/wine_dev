@@ -49,6 +49,23 @@ function formatToDate(dateStr: string): string {
   return `${year}-${month}-${day}`;
 }
 
+export interface IRegInput {
+  title: string;
+  region: string;
+  length_days: number;
+  description: string;
+  price: number;
+  path_img: string;
+}
+
+const initTbDate = {
+  arrDate: [],
+};
+
+export interface ITbDate {
+  arrDate: Array<object>;
+}
+
 export function TourEditPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -61,27 +78,11 @@ export function TourEditPage() {
     path_img: "",
   };
 
-  interface IRegInput {
-    title: string;
-    region: string;
-    length_days: number;
-    description: string;
-    price: number;
-    path_img: string;
-  }
-
-  const initTbDate = {
-    arrDate: [],
-  };
-
-  interface ITbDate {
-    arrDate: Array<object>;
-  }
 
   const [form] = Form.useForm();
   const [inputs, setInputs] = useState<IRegInput>(initRegInputs);
   const [tbDate, setTbDate] = useState<ITbDate>(initTbDate);
-  const [valueNumberDay, setNumberDay] = useState(0);
+  const [valueNumberDay, setNumberDay] = useState<number>(0);
   const [coordinates, setCoordinates] = useState<CoordType>([0, 0]);
   const [tbDateTemp, setTbDateTemp] = useState<ITbDate>(initTbDate);
 
@@ -93,7 +94,6 @@ export function TourEditPage() {
   const [MainFileImg, uploadMainFileImg] = useState("");
   const handleFileChange = (info: UploadChangeParam<UploadFile>) => {
     if (info.file.status === "done") {
-      //  console.log(`Загруженный файл: ${info.fileList[0].response.newFileNmae}`);
       uploadMainFileImg(() => info.fileList[0].response.newFileNmae);
     } else if (info.file.status === "error") {
       console.log(`${info.file.name} файл не был загружен.`);
@@ -101,7 +101,6 @@ export function TourEditPage() {
   };
 
   const handleFileRemove = (file: UploadFile) => {
-    // console.log("handleFileRemove - file",file.response.newFileNmae)
     console.log(file);
     return axios
       .post("http://localhost:3009/api/upload_image/del_main", {
@@ -136,10 +135,8 @@ export function TourEditPage() {
     if (respons.status === 200) {
       console.log("Записан!");
       navigate("/lk");
-      // <Alert message="Записан!" type="success" />
     } else {
       console.log("Ошибка записи в базу данных")
-      // <Alert message="Ошибка!" type="error" />
     }
   };
 
@@ -164,8 +161,6 @@ export function TourEditPage() {
             price,
           });
           setInputs(() => form.getFieldsValue());
-          // Допустим, что arrDate и coordinates также возвращаются API
-          // setTbDate({ arrDate: response.data.arrDate });
 
           const arrDateTemp = Tour_dates.map((td: tourDateType) => {
             return {
@@ -230,7 +225,7 @@ export function TourEditPage() {
               </Form.Item>
               <Form.Item label="Даты туров">
                 <TourEditPageTableDate
-                  tbDate={tbDate}
+                  // tbDate={tbDate}
                   tbDateTemp={tbDateTemp}
                   setTbDate={setTbDate}
                   valueNumberDay={valueNumberDay}
