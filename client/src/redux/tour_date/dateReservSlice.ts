@@ -25,10 +25,12 @@ const toursSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(fetchTours.fulfilled, (state, { payload }) => {
-      state.tours = payload; // payload это response.data из thunk
-      state.toursDefault = payload;
-      console.log('Default1',state.toursDefault)
-      console.log('Tours2',state.tours)
+      if (payload) {
+        state.tours = payload; // payload это response.data из thunk
+        state.toursDefault = payload;
+      }
+      // console.log('Default1',state.toursDefault)
+      // console.log('Tours2',state.tours)
       state.isLoading = false;
     });
     
