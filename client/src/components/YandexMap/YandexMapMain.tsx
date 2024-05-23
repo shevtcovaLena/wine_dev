@@ -37,7 +37,7 @@ function YandexMapMain() {
                   coordinates={[Number(el.location_y), Number(el.location_x)]}
                 >
                   <img
-                    src="../../../public/wino pointer.ico"
+                    src="/wino_pointer.ico"
                     onClick={() => setMarker(el.id)}
                   />
                   {marker === el.id && (

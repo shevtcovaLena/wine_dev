@@ -110,27 +110,10 @@ function App() {
                 </h3>
                 <div>
                   <GithubOutlined />
-                  <a href="https://github.com/OlgaAZE">
-                    {" "}
-                    Землянская Ольга{" "}
-                  </a>{" "}
-                  <GithubOutlined />
-                  <a href="https://github.com/VitalyaSamohvalov">
-                    {" "}
-                    Самохвалов Виталий
-                  </a>
-                </div>
-                <div>
-                  <GithubOutlined />
                   <a href="https://github.com/shevtcovaLena">
                     {" "}
                     Шевцова Елена{" "}
-                  </a>{" "}
-                  <GithubOutlined />
-                  <a href="https://github.com/EvstratovNikita">
-                    {" "}
-                    Евстратов Никита
-                  </a>
+                  </a>{" "}и Компания                  
                 </div>
               </div>
               <div>

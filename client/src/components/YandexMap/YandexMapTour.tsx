@@ -37,7 +37,7 @@ function YandexMapTour({ tourId, locationX, locationY }: YandexMapTourProps) {
                 // color="#fc4c00"
                 // popup={{content: tourTitle, position: 'left'}}
               >
-                <img src='../../../public/wino pointer.ico'/>
+                <img src='/wino_pointer.ico'/>
                 </YMapMarker>
       </YMap>
     </YMapComponentsProvider>

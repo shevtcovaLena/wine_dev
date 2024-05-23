@@ -1,4 +1,3 @@
-// import React from "react";
 import { useEffect } from "react";
 import { ITour } from "../../redux/ToursPage/toursTypes";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -32,7 +31,6 @@ export default function AdminPage() {
         theme={{          
           components: {
             Table: {
-              // colorBgContainer: "#fff",
               borderColor: "rgb(199, 180, 180)",
               headerBg: "#EBDAA8"
             }

@@ -9,7 +9,7 @@ export type ToursStateType = {
   toursDefault: ToursType;//Array<ITour>
   isLoading: boolean;
 };
-//мешочек начального состояния
+
 const initialState: ToursStateType = {
   tours: [],
   toursDefault:[],
